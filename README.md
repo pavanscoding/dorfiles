@@ -1,2 +1,2 @@
-# dorfiles
+# dotfiles
 What I use
