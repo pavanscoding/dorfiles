@@ -39,7 +39,8 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+t exec konsole
-
+# start chrome
+bindsym $mod+c exec google-chrome
 # kill focused window
 bindsym $mod+w kill
 
