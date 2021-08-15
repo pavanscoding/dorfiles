@@ -1,0 +1,15 @@
+{
+    "Translator": true,
+    "BDFDB": true,
+    "ReadAllNotificationsButton": true,
+    "BetterVolume": true,
+    "AppNotifications": true,
+    "ZeresPluginLibrary": true,
+    "QuickMention": true,
+    "ShowConnections": true,
+    "SpellCheck": true,
+    "GrammarCorrect": true,
+    "DoubleClickToEdit": true,
+    "        OpenInYouTube": true,
+    "TeX": true
+}
