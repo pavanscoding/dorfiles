@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+##!/bin/bash
 #https://www.reddit.com/r/unixporn/comments/3358vu/i3lock_unixpornworthy_lock_screen/
 sleep .1
 scrot /tmp/screen.png

@@ -222,4 +222,9 @@ assign [class="Google-chrome"] $workspace1
 assign [class="konsole"] $workspace2
 assign [class="discord"] $workspace3
 assign [class="obs"] $workspace4
+for_window [class="discord"] floating enable
+for_window [class="discord"] [floating] resize set 1366 768
+for_window [class="Org.gnome.Nautilus"] floating enable
+for_window [class="Org.gnome.Nautilus"] [floating] resize set 1366 768
 
+# for_window [class="Firefox" instance="Places"] floating enable

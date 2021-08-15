@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env bash
+##!/bin/sh
 
 # If ACPI was not installed, this probably is a battery-less computer.
 ACPI_RES=$(acpi -b)
