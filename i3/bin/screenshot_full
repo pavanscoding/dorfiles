@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 $f=%Y:%m:%d:%H:%M:%S.png
-scrot -d 0.00001 $f
+scrot $f
 mv $f ~/Pictures/
 

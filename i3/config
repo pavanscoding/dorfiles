@@ -39,8 +39,8 @@ floating_modifier $mod
 # Take screen shot 
 # bindsym --release $mod+Print exec "import ~/Pictures/$(date)"
 # bindsym --release $mod+Shift+Print exec "import -window root ~/Pictures/$(date)"
-# bindsym --release $mod+Print exec "scrot '%Y:%m:%d:%H:%M:%S.png' -e 'mv $f ~/Pictures/'"
-bindsym --release $mod+Print exec ~/.config/i3/bin/screenshot_full
+bindsym --release $mod+Print exec "scrot '%Y:%m:%d:%H:%M:%S.png' -e 'mv $f ~/Pictures/'"
+# bindsym --release $mod+Print exec ~/.config/i3/bin/screenshot_full
 
 # start a terminal
 bindsym $mod+t exec konsole
