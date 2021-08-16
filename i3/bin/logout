@@ -5,7 +5,7 @@ option=`echo -e "lock screen\npoweroff\nreboot\nsuspend" | rofi -width 600 -dmen
 #option=`echo -e "lock screen\nlog out\npoweroff\nreboot\nsuspend" | rofi -width 600 -dmenu -p system:`
 case $option in
     suspend)
-        sudo  /usr/bin/systemctl syspend
+        sudo  /usr/bin/systemctl suspend
         ;;
     'lock screen')
         exec ~/.config/i3/bin/lock.sh
