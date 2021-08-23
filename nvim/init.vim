@@ -120,7 +120,7 @@ set nu rnu " relative line numbering
 set clipboard=unnamed " public copy/paste register
 set ruler
 set showcmd
-set noswapfile " doesn't create swap files
+set noswapfile " does't create swap files
 set noshowmode
 set shortmess+=c
 
@@ -319,7 +319,7 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>o
 let g:coc_snippet_next = ','
-let g:coc_snippet_prev = '<'
+let g:coc_snippet_prev = <s-p>
 "NerdTree
 " Start NERDTree when Vim is started without file arguments.
 autocmd StdinReadPre * let s:std_in=1
