@@ -145,7 +145,7 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 " update changes into current buffer
 nnoremap <leader>sv :source $MYVIMRC<cr>
 " enable or disable line wrapping in current buffer
-nnoremap <buffer> <localleader>w :set wrap!<cr>
+nnoremap <buffer> <localleader>w:set wrap!<cr>
 "Run code 
 augroup compileandrun
     autocmd!
@@ -319,7 +319,7 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>o
 let g:coc_snippet_next = ','
-let g:coc_snippet_prev = <s-p>
+let g:coc_snippet_prev = '^'
 "NerdTree
 " Start NERDTree when Vim is started without file arguments.
 autocmd StdinReadPre * let s:std_in=1
@@ -354,7 +354,10 @@ let g:vimtex_quickfix_enabled = 0
 let g:tex_flavor  = 'latex'
 let g:tex_conceal = ''
 let g:vimtex_fold_manual = 1
-let g:vimtex_latexmk_continuous = 1
+" let g:vimtex_latexmk_continuous = 1
+ let g:vimtex_compiler_latexmk = {
+        \ 'continuous' : 1,
+        \}
 let g:vimtex_compiler_progname = 'nvr'
 " use skim if you are on Mac
 " zathura can be downloaded on latex with the command 'sudo apt install zathura'
@@ -380,3 +383,4 @@ au FileType tex let b:AutoPairs = AutoPairsDefine({'$':'$'})
 " endfunction
 " au BufWritePre * let b:start_time=localtime()
 "Control V is past in vim 
+ 

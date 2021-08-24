@@ -1,0 +1,6 @@
+{
+/* "diagnostic.signOffset": 9999999, */
+"diagnostic.checkCurrentLine": true,
+"coc.source.buffer.enable": false,
+"coc.source.around.enable": false
+}
