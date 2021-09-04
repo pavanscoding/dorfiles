@@ -52,13 +52,13 @@ let g:coc_status_warning_sign = '>>'
 " let g:ale_disable_lsp = 1
 " let g:ale_linters = {'python': []}
 " " let g:ale_linters = {'tex': ['texlabs']}
-" let g:coc_global_extensions = [
-"         \ 'coc-pyright',
-"         \ 'coc-texlab',
-"         \ 'coc-clangd',
-"         \ 'coc-sh',
-"         \ 'coc-lsp-wl'
-"         \ ]
+let g:coc_global_extensions = [
+        \ 'coc-pyright',
+        \ 'coc-texlab',
+        \ 'coc-clangd',
+        \ 'coc-sh',
+        \ 'coc-lsp-wl'
+        \ ]
 " Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdtree'
@@ -136,7 +136,7 @@ set laststatus=2
 
 " true colours
 
-set t_Co=256
+" set t_C=256
 
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -366,7 +366,7 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
 autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-let g:NERDTreeWinSize=60
+let g:NERDTreeWinSize=40
 set guifont=DroidSansMono\ Nerd\ Font\ Complete\ Mono\ 11
 let g:airline_powerline_fonts = 1
 "If I go to a different file in a different directory, the working directory
@@ -418,3 +418,4 @@ au FileType tex let b:AutoPairs = AutoPairsDefine({'$':'$'})
 "Control V is past in vim 
 "Wolfram alpha set up
 
+o
