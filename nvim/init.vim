@@ -9,27 +9,57 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
+" Plug 'natebosch/vim-lsc'
+" let g:lsc_server_commands = {'tex': 'texlab'}
+" let g:lsc_enable_autocomplete = v:false
+" let g:lsc_auto_map = v:true
+
+" " Apply the defaults with a few overrides:
+" let g:lsc_auto_map = {'defaults': v:true, 'FindReferences': '<leader>r'}
+
+" " Setting a value to a blank string leaves that command unmapped:
+" let g:lsc_auto_map = {'defaults': v:true, 'FindImplementations': ''}
+
+" " ... or set only the commands you want mapped without defaults.
+" " Complete default mappings are:
+" let g:lsc_auto_map = {
+"     \ 'GoToDefinition': '<C-]>',
+"     \ 'GoToDefinitionSplit': ['<C-W>]', '<C-W><C-]>'],
+"     \ 'FindReferences': 'gr',
+"     \ 'NextReference': '<C-n>',
+"     \ 'PreviousReference': '<C-p>',
+"     \ 'FindImplementations': 'gI',
+"     \ 'FindCodeActions': 'ga',
+"     \ 'Rename': 'gR',
+"     \ 'ShowHover': v:true,
+"     \ 'DocumentSymbol': 'go',
+"     \ 'WorkspaceSymbol': 'gS',
+"     \ 'SignatureHelp': 'gm',
+"     \ 'Completion': 'completefunc',
+"     \}
 Plug 'Vimjas/vim-python-pep8-indent'
 " ALE + CoC
 let g:coc_status_error_sign = '--'
 let g:coc_status_warning_sign = '>>'
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '>>'
-" let g:ale_sign_warning = '⚠'
-let g:ale_sign_warning='--'
-let g:ale_echo_msg_error_str = ' >> '
-" let g:ale_echo_msg_warning_str = ' ⚠ ' 
-let g:ale_echo_msg_warning_str='--'
-let g:ale_echo_msg_format = '[%severity%] %s'
-let g:ale_disable_lsp = 1
-let g:ale_linters = {'python': []}
-" let g:ale_linters = {'tex': ['texlabs']}
-let g:coc_global_extensions = [
-        \ 'coc-pyright',
-        \ 'coc-texlab',
-        \ 'coc-clangd'
-        \ ]
-Plug 'dense-analysis/ale'
+" let g:ale_sign_column_always = 1
+" let g:ale_sign_error = '>>'
+" " let g:ale_sign_warning = '⚠'
+" let g:ale_sign_warning='--'
+" let g:ale_echo_msg_error_str = ' >> '
+" " let g:ale_echo_msg_warning_str = ' ⚠ ' 
+" let g:ale_echo_msg_warning_str='--'
+" let g:ale_echo_msg_format = '[%severity%] %s'
+" let g:ale_disable_lsp = 1
+" let g:ale_linters = {'python': []}
+" " let g:ale_linters = {'tex': ['texlabs']}
+" let g:coc_global_extensions = [
+"         \ 'coc-pyright',
+"         \ 'coc-texlab',
+"         \ 'coc-clangd',
+"         \ 'coc-sh',
+"         \ 'coc-lsp-wl'
+"         \ ]
+" Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdtree'
 Plug 'vwxyutarooo/nerdtree-devicons-syntax'
@@ -38,6 +68,8 @@ Plug 'trusktr/seti.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'lervag/vimtex'
 Plug 'latex-lsp/texlab'
+Plug 'voldikss/vim-mma'
+" Plug 'zdharma/fast-syntax-highlighting'
 " Plug 'LunarWatcher/auto-pairs'
 set spelllang=en_us
 call plug#end()
@@ -383,4 +415,5 @@ au FileType tex let b:AutoPairs = AutoPairsDefine({'$':'$'})
 " endfunction
 " au BufWritePre * let b:start_time=localtime()
 "Control V is past in vim 
- 
+"Wolfram alpha set up
+
