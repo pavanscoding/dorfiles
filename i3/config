@@ -37,11 +37,10 @@ bindsym $mod+u exec amixer -D pulse sset Master unmute && pkill -RTMIN+1 i3block
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 # Take screen shot 
-# bindsym --release $mod+Print exec "import ~/Pictures/$(date)"
-# bindsym --release $mod+Shift+Print exec "import -window root ~/Pictures/$(date)"
-bindsym --release $mod+Print exec "scrot '%Y:%m:%d:%H:%M:%S.png' -e 'mv $f ~/Pictures/'"
-# bindsym --release $mod+Print exec ~/.config/i3/bin/screenshot_full
-
+bindsym Print exec "maim -u | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H:%M:%S).png | xclip -selection clipboard -t image/png"
+bindsym Shift+Print exec "maim -su | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H:%M:%S).png | xclip -selection clipboard -t image/png"
+# bindsym Print exec "maim -u | tee ~/Pictures/$(date +%Y-%m-%d_%H:%M:%S).png | xclip -selection clipboard -t image/png"
+# bindsym Shift+Print exec "maim -su | tee ~/Pictures/$(date +%Y-%m-%d_%H:%M:%S).png | xclip -selection clipboard -t image/png"
 # start a terminal
 bindsym $mod+t exec konsole
 # start chrome
@@ -71,10 +70,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -123,9 +122,9 @@ set $ws10 "10"
 
 set $workspace1 "1: Chrome "
 set $workspace2 "2: Terminal  "
-set $workspace3 "3: Chatting    "
+# set $workspace3 "3: Chatting    "
 set $workspace4 "4: OBS 🖵"
-
+set $workspace3 "3: Chatting "
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
@@ -166,10 +165,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
