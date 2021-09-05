@@ -9,6 +9,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
+Plug 'ryanoasis/powerline-extra-symbols'
 " Plug 'natebosch/vim-lsc'
 " let g:lsc_server_commands = {'tex': 'texlab'}
 " let g:lsc_enable_autocomplete = v:false
@@ -38,6 +39,7 @@ Plug 'jiangmiao/auto-pairs'
 "     \ 'Completion': 'completefunc',
 "     \}
 Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'joom/latex-unicoder.vim'
 " ALE + CoC
 let g:coc_status_error_sign = '--'
 let g:coc_status_warning_sign = '>>'
@@ -107,6 +109,7 @@ set encoding=UTF-8
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'lucius'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -115,7 +118,9 @@ let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
 let g:airline_right_sep = '«'
 let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = '   '
+let g:airline_symbols.linenr = '   '
+let g:airline_symbols.colnr = '  '
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.paste = 'Þ'
@@ -128,7 +133,7 @@ let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
+let g:airline_symbols.readonly = ''
 
 highlight Comment cterm=italic gui=italic
 set laststatus=2
@@ -418,4 +423,4 @@ au FileType tex let b:AutoPairs = AutoPairsDefine({'$':'$'})
 "Control V is past in vim 
 "Wolfram alpha set up
 
-o
+
