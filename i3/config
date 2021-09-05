@@ -36,7 +36,7 @@ bindsym $mod+m exec amixer -D pulse sset Master mute && pkill -RTMIN+1 i3blocks
 bindsym $mod+u exec amixer -D pulse sset Master unmute && pkill -RTMIN+1 i3blocks
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-# Take screen shot 
+# Take screen shot, install maim and xclip 
 bindsym Print exec "maim -u | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H:%M:%S).png | xclip -selection clipboard -t image/png"
 bindsym Shift+Print exec "maim -su | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H:%M:%S).png | xclip -selection clipboard -t image/png"
 # bindsym Print exec "maim -u | tee ~/Pictures/$(date +%Y-%m-%d_%H:%M:%S).png | xclip -selection clipboard -t image/png"
