@@ -71,8 +71,10 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'lervag/vimtex'
 Plug 'latex-lsp/texlab'
 Plug 'voldikss/vim-mma'
+Plug 'metakirby5/codi.vim'
 " Plug 'zdharma/fast-syntax-highlighting'
 " Plug 'LunarWatcher/auto-pairs'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 set spelllang=en_us
 call plug#end()
 set nocompatible
@@ -108,8 +110,10 @@ set encoding=UTF-8
 " air-line
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'lucius'
+" let g:airline_theme = 'nightfly'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#coc#enabled = 0
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -153,7 +157,6 @@ if (has("termguicolors"))
 endif
 
 colorscheme nightfly
-
 set nu rnu " relative line numbering
 set clipboard=unnamed " public copy/paste register
 set ruler
@@ -191,11 +194,9 @@ augroup compileandrun
     autocmd filetype cpp nnoremap <buffer> <f8> :vnew <bar> :te ./a.out <cr>i
     autocmd Filetype python nnoremap <buffer> <f8> :w<CR>:vsplit<cr>:vert ter python3 "%"<CR>i
     autocmd filetype tex nnoremap <buffer> <f8> :w <bar>:VimtexCompile <cr>
-    "PDFlatex comes with texlive which is downloaded below so its all good 
-    " autocmd filetype tex nnoremap <buffer> <f7> :w <bar>!pdflatex %:r<cr>:w <bar>!asy -noV %:r-*.asy<cr>:w <bar> !pdflatex %:r<cr><cr>:w<cr>
     " autocmd filetype tex nnoremap <buffer> <f7> :w <bar>!latexmk %<cr>:w <bar>!asy -noV %:r-*.asy<cr>:w <bar> !latexmk %:r<cr><cr>:w<cr>
     "if there is an error with the first one, use the bottom one
-    " autocmd filetype tex nnoremap <buffer> <f7> :w <bar>!pdflatex %:r<cr>:w <bar>!asy -noV -render=0 %:r-*.asy<cr>:w <bar> !pdflatex %:r<cr><cr>:w<cr>
+    " autocmd filetype tex nnoremap <buffer> <f7> :w <bar>!latexmk %:r<cr>:w <bar>!asy -noV -render=0 %:r-*.asy<cr>:w <bar> !latexmk %:r<cr><cr>:w<cr>
 augroup END
 "Python autocomplete
 let g:python3_host_prog='/usr/bin/python3'
@@ -424,4 +425,15 @@ au FileType tex let b:AutoPairs = AutoPairsDefine({'$':'$'})
 "Control V is past in vim 
 "Wolfram alpha set up
 
+" Codi.vim
+" Change the color
+" highlight CodiVirtualText guifg=cyan
+
+" let g:codi#virtual_text_prefix = "❯ "
+
+
+"
+" let g:codi#aliases = {
+"                    \ 'javascript.jsx': 'javascript',
+"                    \ }
 

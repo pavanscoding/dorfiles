@@ -4,5 +4,11 @@
 "coc.source.buffer.enable": false,
 "coc.source.around.enable": false,
 "coc.source.file.enable": false
+/* "cSpell.enabledLanguageIds": [ */
+/*     "tex" */
+/* ], */
+/* "cSpell.languageSettings": [ */
+/*     {"languageId": "tex", "dictionaries": ["latex"]} */
+/* ] */
 }
 

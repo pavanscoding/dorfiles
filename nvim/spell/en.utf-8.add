@@ -50,3 +50,5 @@ totient
 asymptote
 subdirectory
 asy
+WLOG
+LTE
