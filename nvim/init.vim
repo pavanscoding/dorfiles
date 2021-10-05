@@ -426,6 +426,6 @@ au FileType tex let b:AutoPairs = AutoPairsDefine({'$':'$'})
 "Control V is past in vim 
 "Wolfram alpha set up
 let g:better_escape_interval = 200
-let g:better_escape_shortcut = 'ff'
+let g:better_escape_shortcut = 'fd'
 
 
