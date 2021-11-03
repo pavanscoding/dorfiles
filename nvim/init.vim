@@ -102,7 +102,7 @@ au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.css,*.rkt,*.h,*.html,*.tex,*.vim,*
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
-    \ set textwidth=120 |
+    \ set textwidth=200000 |
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix |
@@ -180,6 +180,13 @@ set pastetoggle=<F2> " enable paste mode
 " Fixes wrapped line issues
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
+nnoremap <expr> $ v:count ? '$' : 'g$'
+nnoremap <expr> ^ v:count ? '^' : 'g^'
+nnoremap <expr> 0 v:count ? '0' : 'g0'
+set breakindent
+set wrapmargin=1
+set formatoptions+=t
+set formatoptions-=l
 " clears highlights
 nnoremap // :noh<return>
 " moves current line down or up
