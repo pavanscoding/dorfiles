@@ -106,6 +106,7 @@ au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.css,*.rkt,*.h,*.html,*.tex,*.vim,*
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix |
+    \ set linebreak
 set encoding=UTF-8
 
 " air-line
@@ -176,8 +177,10 @@ set pastetoggle=<F2> " enable paste mode
 " set showmatch "highlights matching brackets
 " set incsearch "search as characters are entered
 " set hlsearch "highlights matching searches
-
-"clears highlights
+" Fixes wrapped line issues
+nnoremap <expr> j v:count ? 'j' : 'gj'
+nnoremap <expr> k v:count ? 'k' : 'gk'
+" clears highlights
 nnoremap // :noh<return>
 " moves current line down or up
 nnoremap <leader>- ddp
