@@ -129,12 +129,13 @@ set $workspace2 "2: Terminal  "
 # set $workspace3 "3: Chatting    "
 set $workspace4 "4: OBS 🖵"
 set $workspace3 "3: Chatting "
+set $workspace5 "5: Zoom"
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
 bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace number $ws5
+bindsym $mod+5 workspace $workspace5
 bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
@@ -146,7 +147,7 @@ bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
 bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+5 move container to workspace $workspace5
 bindsym $mod+Shift+6 move container to workspace number $ws6
 bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
@@ -231,6 +232,8 @@ assign [class="Google-chrome"] $workspace1
 assign [class="konsole"] $workspace2
 assign [class="discord"] $workspace3
 assign [class="obs"] $workspace4
+assign [class="zoom"] $workspace5
+for_window [class="zoom"] floating enable
 for_window [class="discord"] floating enable
 for_window [class="whatsdesk"] floating enable
 for_window [class="whatsdesk"] [floating] resize set 1366 768
