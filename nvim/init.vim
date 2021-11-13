@@ -555,7 +555,7 @@ nnoremap <silent> <Space>bw :BufferOrderByWindowNumber<CR>
 lua << END
 require'lualine'.setup {
   options = {
-    icons_enabled = false,
+    icons_enabled = true,
     theme = 'auto',
     section_separators = '', component_separators = '|',
     disabled_filetypes = {},
