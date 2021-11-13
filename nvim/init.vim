@@ -1,58 +1,14 @@
 call plug#begin(stdpath('data'))
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-surround'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
-" Plug 'natebosch/vim-lsc'
-" let g:lsc_server_commands = {'tex': 'texlab'}
-" let g:lsc_enable_autocomplete = v:false
-" let g:lsc_auto_map = v:true
-
-" " Apply the defaults with a few overrides:
-" let g:lsc_auto_map = {'defaults': v:true, 'FindReferences': '<leader>r'}
-
-" " Setting a value to a blank string leaves that command unmapped:
-" let g:lsc_auto_map = {'defaults': v:true, 'FindImplementations': ''}
-
-" " ... or set only the commands you want mapped without defaults.
-" " Complete default mappings are:
-" let g:lsc_auto_map = {
-"     \ 'GoToDefinition': '<C-]>',
-"     \ 'GoToDefinitionSplit': ['<C-W>]', '<C-W><C-]>'],
-"     \ 'FindReferences': 'gr',
-"     \ 'NextReference': '<C-n>',
-"     \ 'PreviousReference': '<C-p>',
-"     \ 'FindImplementations': 'gI',
-"     \ 'FindCodeActions': 'ga',
-"     \ 'Rename': 'gR',
-"     \ 'ShowHover': v:true,
-"     \ 'DocumentSymbol': 'go',
-"     \ 'WorkspaceSymbol': 'gS',
-"     \ 'SignatureHelp': 'gm',
-"     \ 'Completion': 'completefunc',
-"     \}
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'joom/latex-unicoder.vim'
-" ALE + CoC
 let g:coc_status_error_sign = '--'
 let g:coc_status_warning_sign = '>>'
-" let g:ale_sign_column_always = 1
-" let g:ale_sign_error = '>>'
-" " let g:ale_sign_warning = '⚠'
-" let g:ale_sign_warning='--'
-" let g:ale_echo_msg_error_str = ' >> '
-" " let g:ale_echo_msg_warning_str = ' ⚠ ' 
-" let g:ale_echo_msg_warning_str='--'
-" let g:ale_echo_msg_format = '[%severity%] %s'
-" let g:ale_disable_lsp = 1
-" let g:ale_linters = {'python': []}
-" " let g:ale_linters = {'tex': ['texlabs']}
 let g:coc_global_extensions = [
         \ 'coc-pyright',
         \ 'coc-texlab',
@@ -60,10 +16,7 @@ let g:coc_global_extensions = [
         \ 'coc-sh',
         \ 'coc-lsp-wl'
         \ ]
-" Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'preservim/nerdtree'
-Plug 'vwxyutarooo/nerdtree-devicons-syntax'
 Plug 'tpope/vim-commentary'
 Plug 'trusktr/seti.vim'
 Plug 'ryanoasis/vim-devicons'
@@ -71,26 +24,22 @@ Plug 'lervag/vimtex'
 Plug 'latex-lsp/texlab'
 Plug 'voldikss/vim-mma'
 Plug 'metakirby5/codi.vim'
-" Plug 'zdharma/fast-syntax-highlighting'
-" Plug 'LunarWatcher/auto-pairs'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'jdhao/better-escape.vim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-tree.lua'
+" Plug 'Yggdroot/indentLine'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'glepnir/dashboard-nvim'
 set spelllang=en_us
 call plug#end()
 set nocompatible
 filetype plugin indent on
 filetype plugin on
-" let mapleader = "-"
-" let maplocalleader = "\\"
 set modifiable 
-"split navigations
-" nnoremap <C-J> <C-W><C-J>
-" nnoremap <C-K> <C-W><C-K>
-" nnoremap <C-L> <C-W><C-L>
-" nnoremap <C-H> <C-W><C-H>
 set mouse=a "mouse support"
 set splitbelow
 set splitright
@@ -110,39 +59,6 @@ au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.css,*.rkt,*.h,*.html,*.tex,*.vim,*
     \ set fileformat=unix |
     \ set linebreak
 set encoding=UTF-8
-
-" air-line
-" let g:airline_powerline_fonts = 1
-" let g:airline_theme = 'lucius'
-" " let g:airline_theme = 'nightfly'
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#whitespace#enabled = 0
-" let g:airline#extensions#coc#enabled = 0
-
-" if !exists('g:airline_symbols')
-"     let g:airline_symbols = {}
-" endif
-"   " let g:airline_symbols.spell = 'Ꞩ'
-" let g:airline_left_sep = '»'
-" let g:airline_left_sep = '▶'
-" let g:airline_right_sep = '«'
-" let g:airline_right_sep = '◀'
-" let g:airline_symbols.maxlinenr = '   '
-" let g:airline_symbols.linenr = '   '
-" let g:airline_symbols.colnr = '  '
-" let g:airline_symbols.branch = '⎇'
-" let g:airline_symbols.paste = 'ρ'
-" let g:airline_symbols.paste = 'Þ'
-" let g:airline_symbols.paste = '∥'
-" let g:airline_symbols.whitespace = 'Ξ'
-
-" " airline symbols
-" let g:airline_left_sep = ''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = ''
-" let g:airline_symbols.branch = ''
-" let g:airline_symbols.readonly = ''
 
 highlight Comment cterm=italic gui=italic
 set laststatus=2
@@ -174,11 +90,6 @@ set autoindent " enable auto indentation of lines
 set smartindent " allow vim to best-effort guess the indentation
 set pastetoggle=<F2> " enable paste mode
 
-" set wildmenu "graphical auto omplete menu
-" set lazyredraw "redraws the screne when it needs to
-" set showmatch "highlights matching brackets
-" set incsearch "search as characters are entered
-" set hlsearch "highlights matching searches
 " Fixes wrapped line issues
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
@@ -373,31 +284,7 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>o
 let g:coc_snippet_next = ','
-let g:coc_snippet_prev = '^'
-"NerdTree
-" Start NERDTree when Vim is started without file arguments.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
-" Start NERDTree. If a file is specified, move the cursor to its window.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
-" Exit Vim if NERDTree is the only window left.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-    \ quit | endif
-" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-let g:NERDTreeWinSize=40
-set guifont=DroidSansMono\ Nerd\ Font\ Complete\ Mono\ 11
-" let g:airline_powerline_fonts = 1
-"If I go to a different file in a different directory, the working directory
-"is the one I changed 
-set autochdir 
-let g:NERDTreeUseSimpleIndicator = 1
-let g:NERDTreeGitStatusUseNerdFonts = 1
-autocmd FileType nerdtree setlocal nolist
-
-let g:NERDTreeGitStatusWithFlags = 1
+let g:coc_snippet_prev = '*'
  
 "Make sure you download latex
 "sudo apt install texlive-full
@@ -419,23 +306,7 @@ let g:vimtex_view_method = 'zathura'
 
 "switch back to this one later when it is fixed
 au FileType tex let b:AutoPairs = AutoPairsDefine({'$':'$'})
-" let g:AutoPairs = autopairs#AutoPairsDefine([{'open': '\\[', 'close': '\]', 'filetype': 'tex'}])
 
-"Vim auto save
-"If vim starts to get slow, change the autosave_seconds value higher
-" Save on lost focus/exit 
-" autocmd FocusLost,VimLeavePre,TextChangedI,InsertLeave,CursorHoldI * silent! w
-" Also, save 3 times per second if there are changes
-" let g:autosave_seconds = 0.3 
-" au BufRead,BufNewFile * let b:start_time=localtime()
-" au CursorHold * silent! call UpdateFile()
-" function! UpdateFile()
-"   if ((localtime() - b:start_time) >= g:autosave_seconds)
-"     update
-"     let b:start_time=localtime()
-"   endif
-" endfunction
-" au BufWritePre * let b:start_time=localtime()
 let g:better_escape_interval = 200
 let g:better_escape_shortcut = 'fd'
 
@@ -552,11 +423,12 @@ nnoremap <silent> <Space>bw :BufferOrderByWindowNumber<CR>
 " :BarbarDisable - very bad command, should never be used
  
 " Lualine
+au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree" | set laststatus=0 | else | set laststatus=2 | endif
 lua << END
 require'lualine'.setup {
   options = {
     icons_enabled = true,
-    theme = 'auto',
+    theme = 'nightfly',
     section_separators = '', component_separators = '|',
     disabled_filetypes = {},
     always_divide_middle = true,
@@ -582,3 +454,164 @@ require'lualine'.setup {
   extensions = {}
 }
 END
+
+" nvim-tree.lua
+let g:nvim_tree_gitignore = 1 "0 by default
+let g:nvim_tree_quit_on_open = 1 "0 by default, closes the tree when you open a file
+let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
+let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
+let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
+let g:nvim_tree_root_folder_modifier = ':~' "This is the default. See :help filename-modifiers for more options
+let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
+let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
+let g:nvim_tree_disable_window_picker = 1 "0 by default, will disable the window picker.
+let g:nvim_tree_icon_padding = ' ' "one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if you set an empty string depending on your font.
+let g:nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separator between symlinks' source and target.
+let g:nvim_tree_respect_buf_cwd = 1 "0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
+let g:nvim_tree_create_in_closed_folder = 0 "1 by default, When creating files, sets the path of a file when cursor is on a closed folder to the parent folder when 0, and inside the folder when 1.
+let g:nvim_tree_refresh_wait = 500 "1000 by default, control how often the tree can be refreshed, 1000 means the tree can be refresh once per 1000ms.
+let g:nvim_tree_window_picker_exclude = {
+    \   'filetype': [
+    \     'notify',
+    \     'packer',
+    \     'qf'
+    \   ],
+    \   'buftype': [
+    \     'terminal'
+    \   ]
+    \ }
+" Dictionary of buffer option names mapped to a list of option values that
+" indicates to the window picker that the buffer's window should not be
+" selectable.
+let g:nvim_tree_special_files = { 'README.md': 1, 'Makefile': 1, 'MAKEFILE': 1 } " List of filenames that gets highlighted with NvimTreeSpecialFile
+let g:nvim_tree_show_icons = {
+    \ 'git': 1,
+    \ 'folders': 1,
+    \ 'files': 1,
+    \ 'folder_arrows': 1,
+    \ }
+"If 0, do not show the icons for one of 'git' 'folder' and 'files'
+"1 by default, notice that if 'files' is 1, it will only display
+"if nvim-web-devicons is installed and on your runtimepath.
+"if folder is 1, you can also tell folder_arrows 1 to show small arrows next to the folder icons.
+"but this will not work when you set indent_markers (because of UI conflict)
+
+" default will show icon by default if no icon is provided
+" default shows no icon by default
+let g:nvim_tree_icons = {
+    \ 'default': '',
+    \ 'symlink': '',
+    \ 'git': {
+    \   'unstaged': "✗",
+    \   'staged': "✓",
+    \   'unmerged': "",
+    \   'renamed': "➜",
+    \   'untracked': "★",
+    \   'deleted': "",
+    \   'ignored': "◌"
+    \   },
+    \ 'folder': {
+    \   'arrow_open': "",
+    \   'arrow_closed': "",
+    \   'default': "",
+    \   'open': "",
+    \   'empty': "",
+    \   'empty_open': "",
+    \   'symlink': "",
+    \   'symlink_open': "",
+    \   }
+    \ }
+
+nnoremap <F6> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
+" NvimTreeOpen, NvimTreeClose, NvimTreeFocus, NvimTreeFindFileToggle, and NvimTreeResize are also available if you need them
+
+set termguicolors " this variable must be enabled for colors to be applied properly
+
+" a list of groups can be found at `:help nvim_tree_highlight`
+highlight NvimTreeFolderIcon guibg=blue
+lua << END
+require'nvim-tree'.setup {
+  disable_netrw       = true,
+  hijack_netrw        = true,
+  open_on_setup       = false,
+  ignore_ft_on_setup  = {},
+  auto_close          = true,
+  open_on_tab         = false,
+  hijack_cursor       = false,
+  update_cwd          = false,
+  update_to_buf_dir   = {
+    enable = true,
+    auto_open = true,
+  },
+  diagnostics = {
+    enable = false,
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
+    }
+  },
+  update_focused_file = {
+    enable      = false,
+    update_cwd  = false,
+    ignore_list = {}
+  },
+  system_open = {
+    cmd  = nil,
+    args = {}
+  },
+  filters = {
+    dotfiles = false,
+    custom = {}
+  },
+  view = {
+    width = 40,
+    height = 30,
+    hide_root_folder = false,
+    side = 'left',
+    auto_resize = false,
+    mappings = {
+      custom_only = false,
+      list = {}
+    }
+  },
+}
+END
+
+" telescope.nvim
+" Find files using Telescope command-line sugar.
+nnoremap ff :Telescope find_files<cr>
+nnoremap fg :Telescope live_grep<cr>
+nnoremap fb :Telescope buffers<cr>
+nnoremap fh :Telescope help_tags<cr>
+
+lua << END
+require("telescope").setup {
+  defaults = {
+    prompt_prefix = "❯ ",
+    selection_caret = "❯ ",
+    sorting_strategy = "ascending",
+    color_devicons = true,
+    layout_config = {
+      prompt_position = "top",
+      horizontal = {
+        width_padding = 0.04,
+        height_padding = 0.1,
+        preview_width = 0.6,
+      },
+      vertical = {
+        width_padding = 0.05,
+        height_padding = 1,
+        preview_height = 0.5,
+      },
+    },
+    dynamic_preview_title = true,
+  },
+}
+END
+
+" Dashboard
+let g:dashboard_default_executive ='telescope'
