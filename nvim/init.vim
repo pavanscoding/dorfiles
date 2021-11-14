@@ -400,7 +400,7 @@ nnoremap <silent>    <A-7> :BufferGoto 7<CR>
 nnoremap <silent>    <A-8> :BufferGoto 8<CR>
 nnoremap <silent>    <A-9> :BufferLast<CR>
 " Pin/unpin buffer
-nnoremap <silent>    <A-p> :BufferPin<CR>
+nnoremap <silent>    <A-i> :BufferPin<CR>
 " Close buffer
 nnoremap <silent>    <A-c> :BufferClose<CR>
 " Wipeout buffer
@@ -615,3 +615,25 @@ END
 
 " Dashboard
 let g:dashboard_default_executive ='telescope'
+
+let g:dashboard_custom_header = [
+\'             ;::::;                            ',   
+\'           ;::::; :;                           ', 
+\'         ;:::::;   :;                          ', 
+\'        ;:::::;     ;.                         ', 
+\'       ,:::::;       ;           OOO\          ', 
+\'       ::::::;       ;          OOOOO\         ', 
+\'       ;:::::;       ;         OOOOOOOO        ', 
+\'      ,;::::::;     ;;         / OOOOOOO       ', 
+\'    ;:::::::::`. ,,,;.        /  / DOOOOOO     ',  
+\'  .;;:::::::::::::::::;,     /  /     DOOOO    ', 
+\' ,::::::;::::::;;;;::::;,   /  /        DOOO   ', 
+\';`::::::`;::::::;;;::::: ,#/  /          DOOO  ',  
+\':`:::::::`;::::::;;::: ;::#  /            DOOO ',
+\'::`:::::::`;:::::::: ;::::# /              DOO ',
+\'`:`:::::::`;:::::: ;::::::#/               DOO ',
+\' :::`:::::::`;; ;:::::::::##                OO ',
+\' ::::`:::::::`;::::::::;:::#                OO ',
+\' `:::::`::::::::::::;;`:;::#                O  ',
+\'  `:::::`::::::::;; /  / `:#                   ',
+\]
