@@ -3,7 +3,9 @@
 "diagnostic.checkCurrentLine": true,
 "coc.source.buffer.enable": false,
 "coc.source.around.enable": false,
-"coc.source.file.enable": false
+"coc.source.file.enable": false,
+"clangd.fallbackFlags": [ "-std=c++17" ]
+/* "clangd.arguments": ["-std=c++17"] */
 /* "cSpell.enabledLanguageIds": [ */
 /*     "tex" */
 /* ], */

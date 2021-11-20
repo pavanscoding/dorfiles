@@ -33,7 +33,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'Yggdroot/indentLine'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'glepnir/dashboard-nvim'
+" Plug 'glepnir/dashboard-nvim'
 set spelllang=en_us
 call plug#end()
 set nocompatible
@@ -115,8 +115,9 @@ nnoremap <buffer> <localleader>w:set wrap!<cr>
 augroup compileandrun
     autocmd!
     " autocmd filetype cpp nnoremap <buffer> <f7> :w <bar> !g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result % <cr>
-    autocmd filetype cpp nnoremap <buffer> <f7> :w<cr>:vsplit<cr>:vert ter g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr>i 
-    autocmd filetype cpp nnoremap <buffer> <f8> :vnew <bar> :te ./a.out <cr>i
+    autocmd filetype cpp nnoremap <buffer> <f3> :w<cr>:vsplit<cr>:vert ter g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr>i 
+    autocmd filetype cpp nnoremap <buffer> <f4> :vnew <bar> :te ./a.out <cr>i
+    autocmd filetype cpp nnoremap <buffer> <F8> :w <bar>!g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr> :vnew <bar> :te ./a.out <cr><cr>i
     autocmd Filetype python nnoremap <buffer> <f8> :w<CR>:vsplit<cr>:vert ter python3 "%"<CR>i
     autocmd filetype tex nnoremap <buffer> <f8> :w <bar>:VimtexCompile <cr>
     " autocmd filetype tex nnoremap <buffer> <f7> :w <bar>!latexmk %<cr>:w <bar>!asy -noV %:r-*.asy<cr>:w <bar> !latexmk %:r<cr><cr>:w<cr>
@@ -285,7 +286,7 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>o
 let g:coc_snippet_next = ','
 let g:coc_snippet_prev = '*'
- 
+" let g:coc_user_config['languageserver'].ccls.initializationOptions.clang.extraargs='-std=c++17'
 "Make sure you download latex
 "sudo apt install texlive-full
 "Also download latexmk which is downloaded using "sudo apt-get install latexmk"
@@ -402,7 +403,7 @@ nnoremap <silent>    <A-9> :BufferLast<CR>
 " Pin/unpin buffer
 nnoremap <silent>    <A-i> :BufferPin<CR>
 " Close buffer
-nnoremap <silent>    <A-c> :BufferClose<CR>
+nnoremap <silent>    <A-w> :BufferClose<CR>
 " Wipeout buffer
 "                          :BufferWipeout<CR>
 " Close commands
@@ -423,7 +424,7 @@ nnoremap <silent> <Space>bw :BufferOrderByWindowNumber<CR>
 " :BarbarDisable - very bad command, should never be used
  
 " Lualine
-au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree" | set laststatus=0 | else | set laststatus=2 | endif
+" au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree" | set laststatus=0 | else | set laststatus=2 | endif
 lua << END
 require'lualine'.setup {
   options = {
@@ -451,7 +452,7 @@ require'lualine'.setup {
     lualine_z = {}
   },
   tabline = {},
-  extensions = {}
+  extensions = {'nvim-tree'}
 }
 END
 
@@ -522,12 +523,10 @@ let g:nvim_tree_icons = {
     \   }
     \ }
 
-nnoremap <F6> :NvimTreeToggle<CR>
-nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <F7> :NvimTreeToggle<CR>
+nnoremap <A-r> :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 " NvimTreeOpen, NvimTreeClose, NvimTreeFocus, NvimTreeFindFileToggle, and NvimTreeResize are also available if you need them
-
-set termguicolors " this variable must be enabled for colors to be applied properly
 
 " a list of groups can be found at `:help nvim_tree_highlight`
 highlight NvimTreeFolderIcon guibg=blue
@@ -580,6 +579,8 @@ require'nvim-tree'.setup {
   },
 }
 END
+" Enter relative directory of file
+let g:nvim_tree_respect_buf_cwd=1
 
 " telescope.nvim
 " Find files using Telescope command-line sugar.
@@ -614,26 +615,26 @@ require("telescope").setup {
 END
 
 " Dashboard
-let g:dashboard_default_executive ='telescope'
+" let g:dashboard_default_executive ='telescope'
 
-let g:dashboard_custom_header = [
-\'             ;::::;                            ',   
-\'           ;::::; :;                           ', 
-\'         ;:::::;   :;                          ', 
-\'        ;:::::;     ;.                         ', 
-\'       ,:::::;       ;           OOO\          ', 
-\'       ::::::;       ;          OOOOO\         ', 
-\'       ;:::::;       ;         OOOOOOOO        ', 
-\'      ,;::::::;     ;;         / OOOOOOO       ', 
-\'    ;:::::::::`. ,,,;.        /  / DOOOOOO     ',  
-\'  .;;:::::::::::::::::;,     /  /     DOOOO    ', 
-\' ,::::::;::::::;;;;::::;,   /  /        DOOO   ', 
-\';`::::::`;::::::;;;::::: ,#/  /          DOOO  ',  
-\':`:::::::`;::::::;;::: ;::#  /            DOOO ',
-\'::`:::::::`;:::::::: ;::::# /              DOO ',
-\'`:`:::::::`;:::::: ;::::::#/               DOO ',
-\' :::`:::::::`;; ;:::::::::##                OO ',
-\' ::::`:::::::`;::::::::;:::#                OO ',
-\' `:::::`::::::::::::;;`:;::#                O  ',
-\'  `:::::`::::::::;; /  / `:#                   ',
-\]
+" let g:dashboard_custom_header = [
+" \'             ;::::;                            ',   
+" \'           ;::::; :;                           ', 
+" \'         ;:::::;   :;                          ', 
+" \'        ;:::::;     ;.                         ', 
+" \'       ,:::::;       ;           OOO\          ', 
+" \'       ::::::;       ;          OOOOO\         ', 
+" \'       ;:::::;       ;         OOOOOOOO        ', 
+" \'      ,;::::::;     ;;         / OOOOOOO       ', 
+" \'    ;:::::::::`. ,,,;.        /  / DOOOOOO     ',  
+" \'  .;;:::::::::::::::::;,     /  /     DOOOO    ', 
+" \' ,::::::;::::::;;;;::::;,   /  /        DOOO   ', 
+" \';`::::::`;::::::;;;::::: ,#/  /          DOOO  ',  
+" \':`:::::::`;::::::;;::: ;::#  /            DOOO ',
+" \'::`:::::::`;:::::::: ;::::# /              DOO ',
+" \'`:`:::::::`;:::::: ;::::::#/               DOO ',
+" \' :::`:::::::`;; ;:::::::::##                OO ',
+" \' ::::`:::::::`;::::::::;:::#                OO ',
+" \' `:::::`::::::::::::;;`:;::#                O  ',
+" \'  `:::::`::::::::;; /  / `:#                   ',
+" \]
