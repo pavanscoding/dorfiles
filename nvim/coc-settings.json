@@ -4,7 +4,10 @@
 "coc.source.buffer.enable": false,
 "coc.source.around.enable": false,
 "coc.source.file.enable": false,
-"clangd.fallbackFlags": [ "-std=c++17" ]
+"clangd.fallbackFlags": [
+  "-std=c++17"
+],
+"clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd"
 /* "clangd.arguments": ["-std=c++17"] */
 /* "cSpell.enabledLanguageIds": [ */
 /*     "tex" */
@@ -13,4 +16,3 @@
 /*     {"languageId": "tex", "dictionaries": ["latex"]} */
 /* ] */
 }
-

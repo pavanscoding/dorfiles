@@ -7,8 +7,8 @@ Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'joom/latex-unicoder.vim'
-let g:coc_status_error_sign = '--'
-let g:coc_status_warning_sign = '>>'
+let g:coc_status_error_sign = ' '
+let g:coc_status_warning_sign = ' '
 let g:coc_global_extensions = [
         \ 'coc-pyright',
         \ 'coc-texlab',
@@ -78,7 +78,7 @@ endif
 
 colorscheme nightfly
 set nu rnu " relative line numbering
-set clipboard=unnamed " public copy/paste register
+set clipboard+=unnamedplus " public copy/paste register
 set ruler
 set showcmd
 set noswapfile " does't create swap files
