@@ -33,4 +33,3 @@ awk -v cpus=$cpus -v cpuload=$load '
         }
     }
 '
-

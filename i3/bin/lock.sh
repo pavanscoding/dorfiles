@@ -9,4 +9,3 @@ convert ~/.config/i3/bin/lock.png -resize 400x200 ~/.config/i3/bin/lock.png
 composite -gravity center ~/.config/i3/bin/lock.png /tmp/screen.png /tmp/screen.png 
 i3lock -u -i /tmp/screen.png
 rm /tmp/screen.png
-

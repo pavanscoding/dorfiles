@@ -218,7 +218,7 @@ custom_action() {
 				ip="$(     echo "${_ip}" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | head -1 )"
 				ip_nm="$(  echo "${_ip}" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/[0-9]+' | head -1 )"
 				ip6="$(    echo "${_ip}" | grep -oE 'inet6' | grep -oE '[0-9a-fA-F]*::.*/[0-9]+' | sed 's/\/.*//g' )"
-				ip6_nm="$( echo "${_ip}" | grep -oE 'inet6' | grep -o '[0-9a-fA-F]*::.*/[0-9]+' || true)"
+				ip6_nm="$( echo "${_ip}" | grep -oE 'inet6' | grep -o'[0-9a-fA-F]*::.*/[0-9]+' || true)"
 				mac="$(    echo "${_ip}" | grep 'link/' | grep -oE '([0-9a-fA-F]{2}:)+[0-9a-fA-F]{2}' | head -1 )"
 				mtu="$(    echo "${_ip}" | grep -oE 'mtu\s*[0-9]+' | sed 's/mtu\s//g' )"
 
@@ -1176,4 +1176,4 @@ else
 fi
 
 exit 0
-E
+E 
