@@ -29,7 +29,7 @@
     width = (0,400) 
 
     # The maximum height of a single notification, excluding the frame.
-    height = (0,300)
+    height = (0,400)
 
     # Position the notification in the top right corner
     origin = top-right
@@ -132,7 +132,7 @@
     # strip: This setting is provided for compatibility with some broken
     #        clients that send markup even though it's not enabled on the
     #        server. Dunst will try to strip the markup but the parsing is
-    #        simplistic so using this option outside of matching rules for
+    #        simplistic so using this option outsie of matching rules for
     #        specific applications *IS GREATLY DISCOURAGED*.
     #
     # no:    Disable markup parsing, incoming notifications will be treated as
@@ -296,7 +296,7 @@
     # Otherwise the "#" and following would be interpreted as a comment.
     background = "#24283b"
     foreground = "#a9b1d6"
-    timeout = 10
+    timeout = 0
     # Icon for notifications with low urgency, uncomment to enable
     new_icon = /usr/share/icons/Adwaita/32x32/apps/preferences-system-notifications-symbolic.symbolic.png
 
@@ -305,7 +305,7 @@
     # Otherwise the "#" and following would be interpreted as a comment.
     background = "#24283b"
     foreground = "#a9b1d6"
-    timeout = 10
+    timeout = 0
     # Icon for notifications with low urgency, uncomment to enable
     new_icon =  /usr/share/icons/Adwaita/32x32/apps/preferences-system-notifications-symbolic.symbolic.png 
 
