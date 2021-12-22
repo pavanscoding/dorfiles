@@ -58,9 +58,9 @@ bindsym Shift+Print exec "maim -su | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d
 # bindsym Shift+Print exec "maim -su | tee ~/Pictures/$(date +%Y-%m-%d_%H:%M:%S).png | xclip -selection clipboard -t image/png"
 # start a terminal
 bindsym $mod+t exec konsole
-# start chrome
-bindsym $mod+c exec google-chrome-stable
-# bindsym $mod+c exec firefox
+# start firefox
+# bindsym $mod+c exec google-chrome-stable
+bindsym $mod+c exec firefox
 # kill focused window
 bindsym $mod+w kill
 
@@ -135,10 +135,10 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-set $workspace1 "1: Chrome "
+set $workspace1 "1: Firefox "
 set $workspace2 "2: Terminal  "
 # set $workspace3 "3: Chatting    "
-set $workspace4 "4: OBS   "
+set $workspace4 "4: OBS  "
 set $workspace3 "3: Chatting "
 set $workspace5 "5: Zoom  "
 # switch to workspace

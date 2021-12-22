@@ -5,9 +5,13 @@
 "coc.source.around.enable": false,
 "coc.source.file.enable": false,
 "clangd.fallbackFlags": [
-  "-std=c++17"
+  "-std=c++17",
+  "-O2",
+  "-Wall" 
 ],
-"clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd"
+"clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd",
+// "python.pythonPath": "/usr/bin/env/python3.9",
+// "python.linting.enabled": false
 /* "clangd.arguments": ["-std=c++17"] */
 /* "cSpell.enabledLanguageIds": [ */
 /*     "tex" */

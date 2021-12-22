@@ -14,7 +14,8 @@ let g:coc_global_extensions = [
         \ 'coc-texlab',
         \ 'coc-clangd',
         \ 'coc-sh',
-        \ 'coc-lsp-wl'
+        \ 'coc-lsp-wl',
+        \ 'coc-java'
         \ ]
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
@@ -24,7 +25,7 @@ Plug 'lervag/vimtex'
 Plug 'latex-lsp/texlab'
 Plug 'voldikss/vim-mma'
 Plug 'metakirby5/codi.vim'
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+" Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'jdhao/better-escape.vim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
@@ -34,6 +35,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 " Plug 'glepnir/dashboard-nvim'
+Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 set spelllang=en_us
 call plug#end()
 set nocompatible
@@ -114,15 +116,22 @@ nnoremap <buffer> <localleader>w:set wrap!<cr>
 "Run code 
 augroup compileandrun
     autocmd!
-    " autocmd filetype cpp nnoremap <buffer> <f7> :w <bar> !g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result % <cr>
+    "C++
     autocmd filetype cpp nnoremap <buffer> <f3> :w<cr>:vsplit<cr>:vert ter g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr>i 
     autocmd filetype cpp nnoremap <buffer> <f4> :vnew <bar> :te ./a.out <cr>i
     autocmd filetype cpp nnoremap <buffer> <F8> :w <bar>!g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr> :vnew <bar> :te ./a.out <cr><cr>i
+    "Python 
     autocmd Filetype python nnoremap <buffer> <f8> :w<CR>:vsplit<cr>:vert ter python3 "%"<CR>i
+    "Latex
     autocmd filetype tex nnoremap <buffer> <f8> :w <bar>:VimtexCompile <cr>
     " autocmd filetype tex nnoremap <buffer> <f7> :w <bar>!latexmk %<cr>:w <bar>!asy -noV %:r-*.asy<cr>:w <bar> !latexmk %:r<cr><cr>:w<cr>
     "if there is an error with the first one, use the bottom one
-    " autocmd filetype tex nnoremap <buffer> <f7> :w <bar>!latexmk %:r<cr>:w <bar>!asy -noV -render=0 %:r-*.asy<cr>:w <bar> !latexmk %:r<cr><cr>:w<cr>
+    " autocmd filetype tex nnoremap <buffer> <f7> :w <bar>!latexmk %:r<cr>:w <bar>!asy -noV -render=0 %:r-*.asy<cr>:w <bar> !latexmk %:r<cr><cr>w<cr>
+    " Java
+     autocmd filetype java nnoremap <buffer> <f3> :w<cr>:vsplit<cr>:vert ter javac "%"<cr>i 
+     " autocmd filetype java nnoremap <buffer> <f4> :vnew <bar> :te java "%:h" <cr>i
+     autocmd filetype java nnoremap <buffer> <f4> :!java -cp %:p:h %:t:r <cr> i
+     autocmd filetype java nnoremap <buffer> <F8> :w <bar>!javac "%"<cr> :vnew <bar> :te java "%:h" <cr><cr>i
 augroup END
 "Python autocomplete
 let g:python3_host_prog='/usr/bin/python3'
@@ -591,7 +600,10 @@ nnoremap fh :Telescope help_tags<cr>
 
 lua << END
 require("telescope").setup {
-  defaults = {
+    defaults = {
+        preview = {
+            treesitter = false
+        },
     prompt_prefix = "❯ ",
     selection_caret = "❯ ",
     sorting_strategy = "ascending",
@@ -637,4 +649,7 @@ END
 " \' ::::`:::::::`;::::::::;:::#                OO ',
 " \' `:::::`::::::::::::;;`:;::#                O  ',
 " \'  `:::::`::::::::;; /  / `:#                   ',
-" \]
+" \]:
+let g:rnvimr_ex_enable = 1
+
+nmap <space>r :RnvimrToggle<CR>
