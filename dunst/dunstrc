@@ -70,7 +70,7 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.). (X11 only)
-    transparency = 40 
+    transparency = 50 
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
@@ -132,7 +132,7 @@
     # strip: This setting is provided for compatibility with some broken
     #        clients that send markup even though it's not enabled on the
     #        server. Dunst will try to strip the markup but the parsing is
-    #        simplistic so using this option outsie of matching rules for
+    #        simplistic so using this option outse of matching rules for
     #        specific applications *IS GREATLY DISCOURAGED*.
     #
     # no:    Disable markup parsing, incoming notifications will be treated as
@@ -438,3 +438,4 @@
 #    set_stack_tag = "volume"
 #
 # vim: ft=cfg
+
