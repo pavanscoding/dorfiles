@@ -15,7 +15,8 @@ let g:coc_global_extensions = [
         \ 'coc-clangd',
         \ 'coc-sh',
         \ 'coc-lsp-wl',
-        \ 'coc-java'
+        \ 'coc-java',
+        \ 'coc-lua'
         \ ]
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
@@ -36,6 +37,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 " Plug 'glepnir/dashboard-nvim'
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+Plug 'vim-scripts/HTML-AutoCloseTag'
 set spelllang=en_us
 call plug#end()
 set nocompatible
