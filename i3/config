@@ -27,6 +27,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # exec --no-startup-id dunst
 # exec discord
 # exec killall discord
+exec_always nm-applet
 exec_always dunst
 exec_always ~/.config/picom/start_picom.sh
 # exec --no-start-up-id "picom --experimental-backends -CGb --config ~/.config/picom/picom.conf" # --config ~/.config/picom/picom.conf  

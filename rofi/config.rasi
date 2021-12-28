@@ -1,3 +1,6 @@
+/** Basic config file **/
+
 configuration {
-	theme: "~/.config/rofi/themes/dt-center.rasi";
+  show-icons:         true;
+  icon-theme:         "Papirus";
 }
