@@ -1,4 +1,7 @@
 call plug#begin(stdpath('data'))
+Plug 'vimwiki/vimwiki'
+Plug 'rcarriga/nvim-notify'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-surround'
@@ -35,8 +38,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'Yggdroot/indentLine'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-" Plug 'glepnir/dashboard-nvim'
-Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+Plug 'glepnir/dashboard-nvim'
 Plug 'vim-scripts/HTML-AutoCloseTag'
 set spelllang=en_us
 call plug#end()
@@ -629,29 +631,70 @@ require("telescope").setup {
 END
 
 " Dashboard
-" let g:dashboard_default_executive ='telescope'
+let g:dashboard_default_executive ='telescope'
 
-" let g:dashboard_custom_header = [
-" \'             ;::::;                            ',   
-" \'           ;::::; :;                           ', 
-" \'         ;:::::;   :;                          ', 
-" \'        ;:::::;     ;.                         ', 
-" \'       ,:::::;       ;           OOO\          ', 
-" \'       ::::::;       ;          OOOOO\         ', 
-" \'       ;:::::;       ;         OOOOOOOO        ', 
-" \'      ,;::::::;     ;;         / OOOOOOO       ', 
-" \'    ;:::::::::`. ,,,;.        /  / DOOOOOO     ',  
-" \'  .;;:::::::::::::::::;,     /  /     DOOOO    ', 
-" \' ,::::::;::::::;;;;::::;,   /  /        DOOO   ', 
-" \';`::::::`;::::::;;;::::: ,#/  /          DOOO  ',  
-" \':`:::::::`;::::::;;::: ;::#  /            DOOO ',
-" \'::`:::::::`;:::::::: ;::::# /              DOO ',
-" \'`:`:::::::`;:::::: ;::::::#/               DOO ',
-" \' :::`:::::::`;; ;:::::::::##                OO ',
-" \' ::::`:::::::`;::::::::;:::#                OO ',
-" \' `:::::`::::::::::::;;`:;::#                O  ',
-" \'  `:::::`::::::::;; /  / `:#                   ',
-" \]:
-let g:rnvimr_ex_enable = 1
+let g:dashboard_custom_header = [
+\'             ;::::;                            ',   
+\'           ;::::; :;                           ', 
+\'         ;:::::;   :;                          ', 
+\'        ;:::::;     ;.                         ', 
+\'       ,:::::;       ;           OOO\          ', 
+\'       ::::::;       ;          OOOOO\         ', 
+\'       ;:::::;       ;         OOOOOOOO        ', 
+\'      ,;::::::;     ;;         / OOOOOOO       ', 
+\'    ;:::::::::`. ,,,;.        /  / DOOOOOO     ',  
+\'  .;;:::::::::::::::::;,     /  /     DOOOO    ', 
+\' ,::::::;::::::;;;;::::;,   /  /        DOOO   ', 
+\';`::::::`;::::::;;;::::: ,#/  /          DOOO  ',  
+\':`:::::::`;::::::;;::: ;::#  /            DOOO ',
+\'::`:::::::`;:::::::: ;::::# /              DOO ',
+\'`:`:::::::`;:::::: ;::::::#/               DOO ',
+\' :::`:::::::`;; ;:::::::::##                OO ',
+\' ::::`:::::::`;::::::::;:::#                OO ',
+\' `:::::`::::::::::::;;`:;::#                O  ',
+\'  `:::::`::::::::;; /  / `:#                   ',
+\]
 
-nmap <space>r :RnvimrToggle<CR>
+" vim notify
+" require('telescope').extensions.notify.notify(<opts>),
+lua << END
+require("notify").setup({
+  -- Animation style (see below for details)
+  stages = "fade",
+
+  -- Function called when a new window is opened, use for changing win settings/config
+  on_open = nil,
+
+  -- Function called when a window is closed
+  on_close = nil,
+
+  -- Render function for notifications. See notify-render()
+  render = "default",
+
+  -- Default timeout for notifications
+  timeout = 5000,
+
+  -- For stages that change opacity this is treated as the highlight behind the window
+  -- Set this to either a highlight group or an RGB hex value e.g. "#000000"
+  background_colour = "Normal",
+
+  -- Minimum width for notification windows
+  minimum_width = 50,
+
+  -- Icons for the different levels
+  icons = {
+    ERROR = "",
+    WARN = "",
+    INFO = "",
+    DEBUG = "",
+    TRACE = "✎",
+  },
+})
+
+END
+command! -nargs=1 Nf call s:NewFile(<q-args>)
+
+function! s:NewFile(fp)
+    echom a:fp
+    execute "e " . expand("%:h") . "/" . a:fp
+endfunction
