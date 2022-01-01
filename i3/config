@@ -29,7 +29,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # exec killall discord
 exec_always nm-applet
 exec_always dunst
-exec_always ~/.config/picom/start_picom.sh
+# exec_always ~/.config/picom/start_picom.sh
 # exec --no-start-up-id "picom --experimental-backends -CGb --config ~/.config/picom/picom.conf" # --config ~/.config/picom/picom.conf  
 # bindsym $mod+q "picom --experimental-backends -b"
 # NetworkManager is the most popular way to manage wireless networks on Linux,
