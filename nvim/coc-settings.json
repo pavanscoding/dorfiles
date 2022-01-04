@@ -10,7 +10,7 @@
   "-Wall" 
 ],
 "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd",
-// "python.pythonPath": "/usr/bin/env/python3.9",
+"python.pythonPath": "/usr/bin/python",
 // "python.linting.enabled": false
 /* "clangd.arguments": ["-std=c++17"] */
 /* "cSpell.enabledLanguageIds": [ */

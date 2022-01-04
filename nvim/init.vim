@@ -1,7 +1,7 @@
 call plug#begin(stdpath('data'))
 Plug 'vimwiki/vimwiki'
 Plug 'rcarriga/nvim-notify'
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-surround'
@@ -45,6 +45,8 @@ call plug#end()
 set nocompatible
 filetype plugin indent on
 filetype plugin on
+" If shit starts to break, delete the next line
+set ww+=<,>,h,l
 set modifiable 
 set mouse=a "mouse support"
 set splitbelow
@@ -310,7 +312,7 @@ let g:tex_flavor  = 'latex'
 let g:tex_conceal = ''
 let g:vimtex_fold_manual = 1
 " let g:vimtex_latexmk_continuous = 1
- let g:vimtex_compiler_latexmk = {
+let g:vimtex_compiler_latexmk = {
         \ 'continuous' : 1,
         \}
 let g:vimtex_compiler_progname = 'nvr'
@@ -632,7 +634,7 @@ END
 
 " Dashboard
 let g:dashboard_default_executive ='telescope'
-
+nnoremap <silent> <expr> <leader>d winnr('$')==1 && tabpagenr('$')==1 && (len(getbufinfo({'buflisted':1})))==1 ? ':bw<CR>:Dashboard<CR>' : ':bw<CR>'
 let g:dashboard_custom_header = [
 \'             ;::::;                            ',   
 \'           ;::::; :;                           ', 
