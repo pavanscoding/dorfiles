@@ -46,7 +46,7 @@ set nocompatible
 filetype plugin indent on
 filetype plugin on
 " If shit starts to break, delete the next line
-set ww+=<,>,h,l
+" set ww+=<,>,h,l
 set modifiable 
 set mouse=a "mouse support"
 set splitbelow
