@@ -17,7 +17,10 @@ let g:coc_global_extensions = [
         \ 'coc-pyright',
         \ 'coc-texlab',
         \ 'coc-clangd',
+        \ 'coc-html',
+        \ 'coc-tsserver',
         \ 'coc-sh',
+        \ 'coc-css',
         \ 'coc-lsp-wl',
         \ 'coc-java',
         \ 'coc-lua'
@@ -30,7 +33,7 @@ Plug 'lervag/vimtex'
 Plug 'latex-lsp/texlab'
 Plug 'voldikss/vim-mma'
 Plug 'metakirby5/codi.vim'
-" Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'jdhao/better-escape.vim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
@@ -41,6 +44,10 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'glepnir/dashboard-nvim'
 Plug 'vim-scripts/HTML-AutoCloseTag'
+" Plug 'sidebar-nvim/sections-dap'
+" Plug 'sidebar-nvim/sidebar.nvim' 
+" Plug 'xeluxee/competitest.nvim'
+" Plug 'MunifTanjim/nui.nvim'
 set spelllang=en_us
 call plug#end()
 set nocompatible
@@ -85,6 +92,8 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+let g:tokyonight_style = "night"
+" colorscheme tokyonight
 colorscheme nightfly
 set nu rnu " relative line numbering
 set clipboard+=unnamedplus " public copy/paste register
@@ -127,6 +136,7 @@ augroup compileandrun
     autocmd filetype cpp nnoremap <buffer> <f3> :w<cr>:vsplit<cr>:vert ter g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr>i 
     autocmd filetype cpp nnoremap <buffer> <f4> :vnew <bar> :te ./a.out <cr>i
     autocmd filetype cpp nnoremap <buffer> <F8> :w <bar>!g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr> :vnew <bar> :te ./a.out <cr><cr>i
+    " autocmd filetype cpp nnoremap <buffer> <F8> :CompetitestRun <cr>
     "Python 
     autocmd Filetype python nnoremap <buffer> <f8> :w<CR>:vsplit<cr>:vert ter python3 "%"<CR>i
     "Latex
@@ -143,7 +153,9 @@ augroup compileandrun
 augroup END
 "Python autocomplete
 let g:python3_host_prog='/usr/bin/python3'
-"reverse the order of coc.nvim 
+" css
+autocmd FileType scss setl iskeyword+=@-@
+" reverse the order of coc.nvim 
 let g:SuperTabDefaultCompletionType = "<c-n>"
 "coc.nvim setup
 " Set internal encoding of vim, not needed n neovim, since coc.nvim using some
@@ -446,7 +458,7 @@ lua << END
 require'lualine'.setup {
   options = {
     icons_enabled = true,
-    theme = 'nightfly',
+    theme = 'auto',
     section_separators = '', component_separators = '|',
     disabled_filetypes = {},
     always_divide_middle = true,
@@ -483,7 +495,7 @@ let g:nvim_tree_root_folder_modifier = ':~' "This is the default. See :help file
 let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
 let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
 let g:nvim_tree_disable_window_picker = 1 "0 by default, will disable the window picker.
-let g:nvim_tree_icon_padding = ' ' "one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if you set an empty string depending on your font.
+let g:nvim_tree_icon_padding = ' ' "one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if u set an empty string depending on your font
 let g:nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separator between symlinks' source and target.
 let g:nvim_tree_respect_buf_cwd = 1 "0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
 let g:nvim_tree_create_in_closed_folder = 0 "1 by default, When creating files, sets the path of a file when cursor is on a closed folder to the parent folder when 0, and inside the folder when 1.
@@ -508,9 +520,7 @@ let g:nvim_tree_show_icons = {
     \ 'files': 1,
     \ 'folder_arrows': 1,
     \ }
-"If 0, do not show the icons for one of 'git' 'folder' and 'files'
-"1 by default, notice that if 'files' is 1, it will only display
-"if nvim-web-devicons is installed and on your runtimepath.
+"If 0, do not show the icons for one of 'git' 'folder' and 'files' 1 by default, notice that if 'files' is 1, it will only display if nvim-web-devicons is installed and on your runtimepath.
 "if folder is 1, you can also tell folder_arrows 1 to show small arrows next to the folder icons.
 "but this will not work when you set indent_markers (because of UI conflict)
 
@@ -733,3 +743,124 @@ noremap <leader>p :call Preview()<CR><CR><CR>
 " map \ + q to compile
 noremap <leader>q :call Compile()<CR><CR>
 
+" sidebar.vim
+" lua << END
+" -- require("sidebar-nvim").setup({
+" --     bindings = { [<F7>] = function() require("sidebar-nvim").toggle() end }
+" --     bindings = { [<A-r>] = function() require("sidebar-nvim").update() end }
+" --     bindings = { [<A-f>] = function() require("sidebar-nvim").focus() end }
+" -- })
+" require("sidebar-nvim").setup({
+"     disable_default_keybindings = 0,
+"     bindings = nil,
+"     open = false,
+"     side = "left",
+"     initial_width = 35,
+"     hide_statusline = false,
+"     update_interval = 1000,
+"     sections = { "datetime", "git", "diagnostics" },
+"     section_separator = "-----",
+"     containers = {
+"         attach_shell = "/bin/zsh", show_all = true, interval = 5000,
+"     },
+"     datetime = { format = "%a %b %d, %H:%M", clocks = { { name = "local" } } },
+"     todos = { ignored_paths = { "~" } },
+"     disable_closing_prompt = false
+" })
+" END
+
+" nnoremap <F6> :SidebarNvimToggle<CR>
+
+" Competitest
+" lua << END
+"     require('competitest').setup {
+" 	local_config_file_name = ".competitest.lua",
+
+" 	floating_border = "rounded",
+" 	floating_border_highlight = "FloatBorder",
+" 	picker_ui = {
+" 		width = 0.2,
+" 		height = 0.3,
+" 		mappings = {
+" 			focus_next = { "j", "<down>", "<Tab>" },
+" 			focus_prev = { "k", "<up>", "<S-Tab>" },
+" 			close = { "<esc>", "<C-c>", "q", "Q" },
+" 			submit = { "<cr>" },
+" 		},
+" 	},
+" 	editor_ui = {
+" 		popup_width = 0.4,
+" 		popup_height = 0.6,
+" 		show_nu = true,
+" 		show_rnu = false,
+" 		normal_mode_mappings = {
+" 			switch_window = { "<C-h>", "<C-l>", "<C-i>" },
+" 			save_and_close = "<C-s>",
+" 			cancel = { "q", "Q" },
+" 		},
+" 		insert_mode_mappings = {
+" 			switch_window = { "<C-h>", "<C-l>", "<C-i>" },
+" 			save_and_close = "<C-s>",
+" 			cancel = "<C-q>",
+" 		},
+" 	},
+" 	runner_ui = {
+" 		total_width = 0.8,
+" 		total_height = 0.8,
+" 		selector_width = 0.3,
+" 		selector_show_nu = false,
+" 		selector_show_rnu = false,
+" 		show_nu = true,
+" 		show_rnu = false,
+" 		mappings = {
+" 			run_again = "R",
+" 			run_all_again = "<C-r>",
+" 			kill = "K",
+" 			kill_all = "<C-k>",
+" 			view_input = { "i", "I" },
+" 			view_output = { "a", "A" },
+" 			view_stdout = { "o", "O" },
+" 			view_stderr = { "e", "E" },
+" 			close = { "q", "Q" },
+" 		},
+" 		viewer = {
+" 			width = 0.5,
+" 			height = 0.5,
+" 			show_nu = true,
+" 			show_rnu = false,
+" 			close_mappings = { "q", "Q" },
+" 		},
+" 	},
+
+" 	save_current_file = true,
+" 	save_all_files = false,
+" 	compile_directory = ".",
+" 	compile_command = {
+" 		c = { exec = "gcc", args = { "-Wall", "$(FNAME)", "-o", "$(FNOEXT)" } },
+" 		cpp = { exec = "g++", args = { "-Wall", "-std=c++17", "-Wshadow", "-O2", "-Wno-unused-result" } },
+" 		rust = { exec = "rustc", args = { "$(FNAME)" } },
+" 		java = { exec = "javac", args = { "$(FNAME)" } },
+" 	},
+" 	running_directory = ".",
+" 	run_command = {
+" 		c = { exec = "./$(FNOEXT)" },
+" 		cpp = { exec = "./a.out" },
+" 		rust = { exec = "./$(FNOEXT)" },
+" 		python = { exec = "python", args = { "$(FNAME)" } },
+" 		java = { exec = "java", args = { "$(FNOEXT)" } },
+" 	},
+" 	multiple_testing = -1,
+" 	maximum_time = 2000,
+
+" 	testcases_directory = ".",
+" 	input_name = "input",
+" 	output_name = "output",
+" 	testcases_files_format = "$(FNOEXT)_$(INOUT)$(TCNUM).txt",
+" 	testcases_compare_method = "squish",
+" }
+" END
+" hi CompetiTestRunning cterm=bold     gui=bold
+" hi CompetiTestDone    cterm=none     gui=none
+" hi CompetiTestCorrect ctermfg=green  guifg=#00ff00
+" hi CompetiTestWarning ctermfg=yellow guifg=orange
+" hi CompetiTestWrong   ctermfg=red    guifg=#ff0000
