@@ -1,7 +1,7 @@
 call plug#begin(stdpath('data'))
 Plug 'L04DB4L4NC3R/texgroff.vim' 
 Plug 'vimwiki/vimwiki'
-Plug 'rcarriga/nvim-notify'
+" Plug 'rcarriga/nvim-notify'
 " Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'sheerun/vim-polyglot'
@@ -44,12 +44,23 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'glepnir/dashboard-nvim'
 Plug 'vim-scripts/HTML-AutoCloseTag'
-" Plug 'sidebar-nvim/sections-dap'
-" Plug 'sidebar-nvim/sidebar.nvim' 
+Plug 'sidebar-nvim/sections-dap'
+Plug 'sidebar-nvim/sidebar.nvim' 
+Plug 'mfussenegger/nvim-dap'
 " Plug 'xeluxee/competitest.nvim'
 " Plug 'MunifTanjim/nui.nvim'
+Plug 'nathom/filetype.nvim'
+Plug 'lewis6991/impatient.nvim'
+Plug 'karb94/neoscroll.nvim'
+Plug 'pwntester/octo.nvim'
+Plug 'tpope/vim-fugitive'
+Plug 'lewis6991/gitsigns.nvim'
 set spelllang=en_us
 call plug#end()
+
+" impatient.nvim
+lua require('impatient')
+
 set nocompatible
 filetype plugin indent on
 filetype plugin on
@@ -481,7 +492,7 @@ require'lualine'.setup {
     lualine_z = {}
   },
   tabline = {},
-  extensions = {'nvim-tree'}
+  extensions = {'nvim-tree','fugitive'}
 }
 END
 
@@ -669,50 +680,6 @@ let g:dashboard_custom_header = [
 \'  `:::::`::::::::;; /  / `:#                   ',
 \]
 
-" vim notify
-" require('telescope').extensions.notify.notify(<opts>),
-lua << END
-require("notify").setup({
-  -- Animation style (see below for details)
-  stages = "fade",
-
-  -- Function called when a new window is opened, use for changing win settings/config
-  on_open = nil,
-
-  -- Function called when a window is closed
-  on_close = nil,
-
-  -- Render function for notifications. See notify-render()
-  render = "default",
-
-  -- Default timeout for notifications
-  timeout = 5000,
-
-  -- For stages that change opacity this is treated as the highlight behind the window
-  -- Set this to either a highlight group or an RGB hex value e.g. "#000000"
-  background_colour = "Normal",
-
-  -- Minimum width for notification windows
-  minimum_width = 50,
-
-  -- Icons for the different levels
-  icons = {
-    ERROR = "",
-    WARN = "",
-    INFO = "",
-    DEBUG = "",
-    TRACE = "✎",
-  },
-})
-
-END
-command! -nargs=1 Nf call s:NewFile(<q-args>)
-
-function! s:NewFile(fp)
-    echom a:fp
-    execute "e " . expand("%:h") . "/" . a:fp
-endfunction
-
 " tex groff vim
 let mapleader="\\"
 
@@ -744,123 +711,173 @@ noremap <leader>p :call Preview()<CR><CR><CR>
 noremap <leader>q :call Compile()<CR><CR>
 
 " sidebar.vim
-" lua << END
-" -- require("sidebar-nvim").setup({
-" --     bindings = { [<F7>] = function() require("sidebar-nvim").toggle() end }
-" --     bindings = { [<A-r>] = function() require("sidebar-nvim").update() end }
-" --     bindings = { [<A-f>] = function() require("sidebar-nvim").focus() end }
-" -- })
-" require("sidebar-nvim").setup({
-"     disable_default_keybindings = 0,
-"     bindings = nil,
-"     open = false,
-"     side = "left",
-"     initial_width = 35,
-"     hide_statusline = false,
-"     update_interval = 1000,
-"     sections = { "datetime", "git", "diagnostics" },
-"     section_separator = "-----",
-"     containers = {
-"         attach_shell = "/bin/zsh", show_all = true, interval = 5000,
-"     },
-"     datetime = { format = "%a %b %d, %H:%M", clocks = { { name = "local" } } },
-"     todos = { ignored_paths = { "~" } },
-"     disable_closing_prompt = false
-" })
-" END
+lua << END
+require("sidebar-nvim").setup({
+    sections = {
+        "files",
+        "git",
+        require("dap-sidebar-nvim.breakpoints"),
+        "todos"
+    },
+    dap = {
+        breakpoints = {
+            icon = "🔍"
+        }
+    }
+})
+END
 
-" nnoremap <F6> :SidebarNvimToggle<CR>
+nnoremap <F6> :SidebarNvimToggle<CR>
 
-" Competitest
-" lua << END
-"     require('competitest').setup {
-" 	local_config_file_name = ".competitest.lua",
+" filetype.nvim
+lua << END
+-- Do not source the default filetype.vim
+vim.g.did_load_filetypes = 1
+END
 
-" 	floating_border = "rounded",
-" 	floating_border_highlight = "FloatBorder",
-" 	picker_ui = {
-" 		width = 0.2,
-" 		height = 0.3,
-" 		mappings = {
-" 			focus_next = { "j", "<down>", "<Tab>" },
-" 			focus_prev = { "k", "<up>", "<S-Tab>" },
-" 			close = { "<esc>", "<C-c>", "q", "Q" },
-" 			submit = { "<cr>" },
-" 		},
-" 	},
-" 	editor_ui = {
-" 		popup_width = 0.4,
-" 		popup_height = 0.6,
-" 		show_nu = true,
-" 		show_rnu = false,
-" 		normal_mode_mappings = {
-" 			switch_window = { "<C-h>", "<C-l>", "<C-i>" },
-" 			save_and_close = "<C-s>",
-" 			cancel = { "q", "Q" },
-" 		},
-" 		insert_mode_mappings = {
-" 			switch_window = { "<C-h>", "<C-l>", "<C-i>" },
-" 			save_and_close = "<C-s>",
-" 			cancel = "<C-q>",
-" 		},
-" 	},
-" 	runner_ui = {
-" 		total_width = 0.8,
-" 		total_height = 0.8,
-" 		selector_width = 0.3,
-" 		selector_show_nu = false,
-" 		selector_show_rnu = false,
-" 		show_nu = true,
-" 		show_rnu = false,
-" 		mappings = {
-" 			run_again = "R",
-" 			run_all_again = "<C-r>",
-" 			kill = "K",
-" 			kill_all = "<C-k>",
-" 			view_input = { "i", "I" },
-" 			view_output = { "a", "A" },
-" 			view_stdout = { "o", "O" },
-" 			view_stderr = { "e", "E" },
-" 			close = { "q", "Q" },
-" 		},
-" 		viewer = {
-" 			width = 0.5,
-" 			height = 0.5,
-" 			show_nu = true,
-" 			show_rnu = false,
-" 			close_mappings = { "q", "Q" },
-" 		},
-" 	},
+" neoscroll
+lua << END
+require('neoscroll').setup({
+    -- All these keys will be mapped to their corresponding default scrolling animation
+    mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
+                '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
+    hide_cursor = true,          -- Hide cursor while scrolling
+    stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+    use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
+    respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+    cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+    easing_function = nil,       -- Default easing function
+    pre_hook = nil,              -- Function to run before the scrolling animation starts
+    post_hook = nil,             -- Function to run after the scrolling animation ends
+    performance_mode = false,    -- Disable "Performance Mode" on all buffers.
+})
+END
 
-" 	save_current_file = true,
-" 	save_all_files = false,
-" 	compile_directory = ".",
-" 	compile_command = {
-" 		c = { exec = "gcc", args = { "-Wall", "$(FNAME)", "-o", "$(FNOEXT)" } },
-" 		cpp = { exec = "g++", args = { "-Wall", "-std=c++17", "-Wshadow", "-O2", "-Wno-unused-result" } },
-" 		rust = { exec = "rustc", args = { "$(FNAME)" } },
-" 		java = { exec = "javac", args = { "$(FNAME)" } },
-" 	},
-" 	running_directory = ".",
-" 	run_command = {
-" 		c = { exec = "./$(FNOEXT)" },
-" 		cpp = { exec = "./a.out" },
-" 		rust = { exec = "./$(FNOEXT)" },
-" 		python = { exec = "python", args = { "$(FNAME)" } },
-" 		java = { exec = "java", args = { "$(FNOEXT)" } },
-" 	},
-" 	multiple_testing = -1,
-" 	maximum_time = 2000,
-
-" 	testcases_directory = ".",
-" 	input_name = "input",
-" 	output_name = "output",
-" 	testcases_files_format = "$(FNOEXT)_$(INOUT)$(TCNUM).txt",
-" 	testcases_compare_method = "squish",
-" }
-" END
-" hi CompetiTestRunning cterm=bold     gui=bold
-" hi CompetiTestDone    cterm=none     gui=none
-" hi CompetiTestCorrect ctermfg=green  guifg=#00ff00
-" hi CompetiTestWarning ctermfg=yellow guifg=orange
-" hi CompetiTestWrong   ctermfg=red    guifg=#ff0000
+" Octo.nvim
+lua << END
+require"octo".setup({
+  default_remote = {"upstream", "origin"}; -- order to try remotes
+  reaction_viewer_hint_icon = "";         -- marker for user reactions
+  user_icon = " ";                        -- user icon
+  timeline_marker = "";                   -- timeline marker
+  timeline_indent = "2";                   -- timeline indentation
+  right_bubble_delimiter = "";            -- Bubble delimiter
+  left_bubble_delimiter = "";             -- Bubble delimiter
+  github_hostname = "";                    -- GitHub Enterprise host
+  snippet_context_lines = 4;               -- number or lines around commented lines
+  file_panel = {
+    size = 10,                             -- changed files panel rows
+    use_icons = true                       -- use web-devicons in file panel
+  },
+  mappings = {
+    issue = {
+      close_issue = "<space>ic",           -- close issue
+      reopen_issue = "<space>io",          -- reopen issue
+      list_issues = "<space>il",           -- list open issues on same repo
+      reload = "<C-r>",                    -- reload issue
+      open_in_browser = "<C-b>",           -- open issue in browser
+      copy_url = "<C-y>",                  -- copy url to system clipboard
+      add_assignee = "<space>aa",          -- add assignee
+      remove_assignee = "<space>ad",       -- remove assignee
+      create_label = "<space>lc",          -- create label
+      add_label = "<space>la",             -- add label
+      remove_label = "<space>ld",          -- remove label
+      goto_issue = "<space>gi",            -- navigate to a local repo issue
+      add_comment = "<space>ca",           -- add comment
+      delete_comment = "<space>cd",        -- delete comment
+      next_comment = "]c",                 -- go to next comment
+      prev_comment = "[c",                 -- go to previous comment
+      react_hooray = "<space>rp",          -- add/remove 🎉 reaction
+      react_heart = "<space>rh",           -- add/remove ❤️ reaction
+      react_eyes = "<space>re",            -- add/remove 👀 reaction
+      react_thumbs_up = "<space>r+",       -- add/remove 👍 reaction
+      react_thumbs_down = "<space>r-",     -- add/remove 👎 reaction
+      react_rocket = "<space>rr",          -- add/remove 🚀 reaction
+      react_laugh = "<space>rl",           -- add/remove 😄 reaction
+      react_confused = "<space>rc",        -- add/remove 😕 reaction
+    },
+    pull_request = {
+      checkout_pr = "<space>po",           -- checkout PR
+      merge_pr = "<space>pm",              -- merge PR
+      list_commits = "<space>pc",          -- list PR commits
+      list_changed_files = "<space>pf",    -- list PR changed files
+      show_pr_diff = "<space>pd",          -- show PR diff
+      add_reviewer = "<space>va",          -- add reviewer
+      remove_reviewer = "<space>vd",       -- remove reviewer request
+      close_issue = "<space>ic",           -- close PR
+      reopen_issue = "<space>io",          -- reopen PR
+      list_issues = "<space>il",           -- list open issues on same repo
+      reload = "<C-r>",                    -- reload PR
+      open_in_browser = "<C-b>",           -- open PR in browser
+      copy_url = "<C-y>",                  -- copy url to system clipboard
+      add_assignee = "<space>aa",          -- add assignee
+      remove_assignee = "<space>ad",       -- remove assignee
+      create_label = "<space>lc",          -- create label
+      add_label = "<space>la",             -- add label
+      remove_label = "<space>ld",          -- remove label
+      goto_issue = "<space>gi",            -- navigate to a local repo issue
+      add_comment = "<space>ca",           -- add comment
+      delete_comment = "<space>cd",        -- delete comment
+      next_comment = "]c",                 -- go to next comment
+      prev_comment = "[c",                 -- go to previous comment
+      react_hooray = "<space>rp",          -- add/remove 🎉 reaction
+      react_heart = "<space>rh",           -- add/remove ❤️ reaction
+      react_eyes = "<space>re",            -- add/remove 👀 reaction
+      react_thumbs_up = "<space>r+",       -- add/remove 👍 reaction
+      react_thumbs_down = "<space>r-",     -- add/remove 👎 reaction
+      react_rocket = "<space>rr",          -- add/remove 🚀 reaction
+      react_laugh = "<space>rl",           -- add/remove 😄 reaction
+      react_confused = "<space>rc",        -- add/remove 😕 reaction
+    },
+    review_thread = {
+      goto_issue = "<space>gi",            -- navigate to a local repo issue
+      add_comment = "<space>ca",           -- add comment
+      add_suggestion = "<space>sa",        -- add suggestion
+      delete_comment = "<space>cd",        -- delete comment
+      next_comment = "]c",                 -- go to next comment
+      prev_comment = "[c",                 -- go to previous comment
+      select_next_entry = "]q",            -- move to previous changed file
+      select_prev_entry = "[q",            -- move to next changed file
+      close_review_tab = "<C-c>",          -- close review tab
+      react_hooray = "<space>rp",          -- add/remove 🎉 reaction
+      react_heart = "<space>rh",           -- add/remove ❤️ reaction
+      react_eyes = "<space>re",            -- add/remove 👀 reaction
+      react_thumbs_up = "<space>r+",       -- add/remove 👍 reaction
+      react_thumbs_down = "<space>r-",     -- add/remove 👎 reaction
+      react_rocket = "<space>rr",          -- add/remove 🚀 reaction
+      react_laugh = "<space>rl",           -- add/remove 😄 reaction
+      react_confused = "<space>rc",        -- add/remove 😕 reaction
+    },
+    submit_win = {
+      approve_review = "<C-a>",            -- approve review
+      comment_review = "<C-m>",            -- comment review
+      request_changes = "<C-r>",           -- request changes review
+      close_review_tab = "<C-c>",          -- close review tab
+    },
+    review_diff = {
+      add_review_comment = "<space>ca",    -- add a new review comment
+      add_review_suggestion = "<space>sa", -- add a new review suggestion
+      focus_files = "<leader>e",           -- move focus to changed file panel
+      toggle_files = "<leader>b",          -- hide/show changed files panel
+      next_thread = "]t",                  -- move to next thread
+      prev_thread = "[t",                  -- move to previous thread
+      select_next_entry = "]q",            -- move to previous changed file
+      select_prev_entry = "[q",            -- move to next changed file
+      close_review_tab = "<C-c>",          -- close review tab
+      toggle_viewed = "<leader><space>",   -- toggle viewer viewed state
+    },
+    file_panel = {
+      next_entry = "j",                    -- move to next changed file
+      prev_entry = "k",                    -- move to previous changed file
+      select_entry = "<cr>",               -- show selected changed file diffs
+      refresh_files = "R",                 -- refresh changed files panel
+      focus_files = "<leader>e",           -- move focus to changed file panel
+      toggle_files = "<leader>b",          -- hide/show changed files panel
+      select_next_entry = "]q",            -- move to previous changed file
+      select_prev_entry = "[q",            -- move to next changed file
+      close_review_tab = "<C-c>",          -- close review tab
+      toggle_viewed = "<leader><space>",   -- toggle viewer viewed state
+    }
+  }
+})
+END
