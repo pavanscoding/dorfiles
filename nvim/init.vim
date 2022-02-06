@@ -51,7 +51,6 @@ Plug 'mfussenegger/nvim-dap'
 " Plug 'MunifTanjim/nui.nvim'
 Plug 'nathom/filetype.nvim'
 Plug 'lewis6991/impatient.nvim'
-Plug 'karb94/neoscroll.nvim'
 Plug 'pwntester/octo.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
@@ -76,7 +75,7 @@ set foldmethod=indent
 set foldlevel=99
 nnoremap <silent> <esc> :noh<cr><esc>
 autocmd FileType tex setlocal spell
-au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.css,*.rkt,*.h,*.html,*.tex,*.vim,*.vimrc
+au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.css,*.rkt,*.h,*.html,*.tex,*.vim,*.vimrc,*.json
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
@@ -711,12 +710,13 @@ noremap <leader>p :call Preview()<CR><CR><CR>
 noremap <leader>q :call Compile()<CR><CR>
 
 " sidebar.vim
+" IF I NEED IT, GET A DEBUGGER FROM NVIM-DAP
 lua << END
 require("sidebar-nvim").setup({
     sections = {
         "files",
         "git",
-        require("dap-sidebar-nvim.breakpoints"),
+--        require("dap-sidebar-nvim.breakpoints"),
         "todos"
     },
     dap = {
@@ -733,24 +733,6 @@ nnoremap <F6> :SidebarNvimToggle<CR>
 lua << END
 -- Do not source the default filetype.vim
 vim.g.did_load_filetypes = 1
-END
-
-" neoscroll
-lua << END
-require('neoscroll').setup({
-    -- All these keys will be mapped to their corresponding default scrolling animation
-    mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
-                '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
-    hide_cursor = true,          -- Hide cursor while scrolling
-    stop_eof = true,             -- Stop at <EOF> when scrolling downwards
-    use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
-    respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-    cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-    easing_function = nil,       -- Default easing function
-    pre_hook = nil,              -- Function to run before the scrolling animation starts
-    post_hook = nil,             -- Function to run after the scrolling animation ends
-    performance_mode = false,    -- Disable "Performance Mode" on all buffers.
-})
 END
 
 " Octo.nvim
@@ -880,4 +862,9 @@ require"octo".setup({
     }
   }
 })
+END
+
+" gitsigns
+lua << END
+require('gitsigns').setup()
 END
