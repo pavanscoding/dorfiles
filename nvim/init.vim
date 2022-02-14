@@ -1,5 +1,5 @@
 call plug#begin(stdpath('data'))
-Plug 'L04DB4L4NC3R/texgroff.vim' 
+" Plug 'L04DB4L4NC3R/texgroff.vim' 
 Plug 'vimwiki/vimwiki'
 " Plug 'rcarriga/nvim-notify'
 " Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
@@ -28,11 +28,13 @@ let g:coc_global_extensions = [
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
 Plug 'trusktr/seti.vim'
+" Make sure you install a font and stuff
 Plug 'ryanoasis/vim-devicons'
+" Install latex and stuff before
 Plug 'lervag/vimtex'
 Plug 'latex-lsp/texlab'
 Plug 'voldikss/vim-mma'
-Plug 'metakirby5/codi.vim'
+" Plug 'metakirby5/codi.vim'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'jdhao/better-escape.vim'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -42,18 +44,21 @@ Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'Yggdroot/indentLine'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'LinArcX/telescope-env.nvim'
 Plug 'glepnir/dashboard-nvim'
 Plug 'vim-scripts/HTML-AutoCloseTag'
 Plug 'sidebar-nvim/sections-dap'
 Plug 'sidebar-nvim/sidebar.nvim' 
 Plug 'mfussenegger/nvim-dap'
 " Plug 'xeluxee/competitest.nvim'
-" Plug 'MunifTanjim/nui.nvim'
 Plug 'nathom/filetype.nvim'
 Plug 'lewis6991/impatient.nvim'
+" Make sure you have git
 Plug 'pwntester/octo.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 set spelllang=en_us
 call plug#end()
 
@@ -145,7 +150,7 @@ augroup compileandrun
     "C++
     autocmd filetype cpp nnoremap <buffer> <f3> :w<cr>:vsplit<cr>:vert ter g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr>i 
     autocmd filetype cpp nnoremap <buffer> <f4> :vnew <bar> :te ./a.out <cr>i
-    autocmd filetype cpp nnoremap <buffer> <F8> :w <bar>!g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr> :vnew <bar> :te ./a.out <cr><cr>i
+   autocmd filetype cpp nnoremap <buffer> <F8> :w <bar>!g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr> :vnew <bar> :te ./a.out <cr><cr>i
     " autocmd filetype cpp nnoremap <buffer> <F8> :CompetitestRun <cr>
     "Python 
     autocmd Filetype python nnoremap <buffer> <f8> :w<CR>:vsplit<cr>:vert ter python3 "%"<CR>i
@@ -159,7 +164,7 @@ augroup compileandrun
      " autocmd filetype java nnoremap <buffer> <f4> :vnew <bar> :te java "%:h" <cr>i
      autocmd filetype java nnoremap <buffer> <f4> :!java -cp %:p:h %:t:r <cr> i
      autocmd filetype java nnoremap <buffer> <F8> :w <bar>!javac "%"<cr> :vnew <bar> :te java "%:h" <cr><cr>i
-     autocmd filetype markdown nnoremap <buffer>  :w <bar>:call Compile()<cr><cr>:call Preview()<cr><cr><cr>
+     " autocmd filetype markdown nnoremap <buffer>  :w <bar>:call Compile()<cr><cr>:call Preview()<cr><cr><cr>
 augroup END
 "Python autocomplete
 let g:python3_host_prog='/usr/bin/python3'
@@ -505,7 +510,7 @@ let g:nvim_tree_root_folder_modifier = ':~' "This is the default. See :help file
 let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
 let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
 let g:nvim_tree_disable_window_picker = 1 "0 by default, will disable the window picker.
-let g:nvim_tree_icon_padding = ' ' "one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if u set an empty string depending on your font
+let g:nvim_tree_icon_padding = ' ' "one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if u set an empty string depending on our font
 let g:nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separator between symlinks' source and target.
 let g:nvim_tree_respect_buf_cwd = 1 "0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
 let g:nvim_tree_create_in_closed_folder = 0 "1 by default, When creating files, sets the path of a file when cursor is on a closed folder to the parent folder when 0, and inside the folder when 1.
@@ -616,10 +621,9 @@ require'nvim-tree'.setup {
   },
 }
 END
-" Enter relative directory of file
-let g:nvim_tree_respect_buf_cwd=1
 
 " telescope.nvim
+" Do sudo pacman -S ripgrep sqlite
 " Find files using Telescope command-line sugar.
 nnoremap ff :Telescope find_files<cr>
 nnoremap fg :Telescope live_grep<cr>
@@ -629,6 +633,7 @@ nnoremap fh :Telescope help_tags<cr>
 lua << END
 require("telescope").setup {
     defaults = {
+        preview=false,
         preview = {
             treesitter = false
         },
@@ -654,6 +659,26 @@ require("telescope").setup {
 }
 END
 
+" native telescope
+lua << END
+-- You dont need to set any of these options. These are the default ones. Only
+-- the loading is important
+require('telescope').setup {
+  extensions = {
+    fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = true,  -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                                       -- the default case_mode is "smart_case"
+    }
+  }
+}
+-- To get fzf loaded and working with telescope, you need to call
+-- load_extension, somewhere after setup function:
+
+require('telescope').load_extension('fzf')
+END
 " Dashboard
 let g:dashboard_default_executive ='telescope'
 nnoremap <silent> <expr> <leader>d winnr('$')==1 && tabpagenr('$')==1 && (len(getbufinfo({'buflisted':1})))==1 ? ':bw<CR>:Dashboard<CR>' : ':bw<CR>'
@@ -679,42 +704,41 @@ let g:dashboard_custom_header = [
 \'  `:::::`::::::::;; /  / `:#                   ',
 \]
 
-" tex groff vim
-let mapleader="\\"
+" " tex groff vim
+" let mapleader="\\"
 
-" Call compile
-" Open the PDF from /tmp/
-function! Preview()
-        :call Compile()<CR><CR>
-        execute "! zathura /tmp/op.pdf &"
-endfunction
+" " Call compile
+" " Open the PDF from /tmp/
+" function! Preview()
+"         :call Compile()<CR><CR>
+"         execute "! zathura /tmp/op.pdf &"
+" endfunction
 
-" [1] Get the extension of the file
-" [2] Apply appropriate compilation command
-" [3] Save PDF as /tmp/op.pdf
-function! Compile()
-        let extension = expand('%:e')
-        if extension == "ms"
-                execute "! groff -ms % -T pdf > /tmp/op.pdf"
-        elseif extension == "tex"
-                execute "! pandoc -f latex -t latex % -o /tmp/op.pdf"
-        elseif extension == "md"
-                execute "! pandoc % -s -o /tmp/op.pdf"
-        endif
-endfunction
+" " [1] Get the extension of the file
+" " [2] Apply appropriate compilation command
+" " [3] Save PDF as /tmp/op.pdf
+" function! Compile()
+"         let extension = expand('%:e')
+"         if extension == "ms"
+"                 execute "! groff -ms % -T pdf > /tmp/op.pdf"
+"         elseif extension == "tex"
+"                 execute "! pandoc -f latex -t latex % -o /tmp/op.pdf"
+"         elseif extension == "md"
+"                 execute "! pandoc % -s -o /tmp/op.pdf"
+"         endif
+" endfunction
 
-" map \ + p to preview
-noremap <leader>p :call Preview()<CR><CR><CR>
+" " map \ + p to preview
+" noremap <leader>p :call Preview()<CR><CR><CR>
 
-" map \ + q to compile
-noremap <leader>q :call Compile()<CR><CR>
+" " map \ + q to compile
+" noremap <leader>q :call Compile()<CR><CR>
 
 " sidebar.vim
 " IF I NEED IT, GET A DEBUGGER FROM NVIM-DAP
 lua << END
 require("sidebar-nvim").setup({
     sections = {
-        "files",
         "git",
 --        require("dap-sidebar-nvim.breakpoints"),
         "todos"
@@ -732,7 +756,7 @@ nnoremap <F6> :SidebarNvimToggle<CR>
 " filetype.nvim
 lua << END
 -- Do not source the default filetype.vim
-vim.g.did_load_filetypes = 1
+   vim.g.did_load_filetypes = 1
 END
 
 " Octo.nvim
