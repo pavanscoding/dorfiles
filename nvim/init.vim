@@ -347,7 +347,7 @@ let g:vimtex_compiler_latexmk = {
 let g:vimtex_compiler_progname = 'nvr'
 " use skim if you are on Mac
 " zathura can be downloaded on latex with the command 'sudo pacman -S zathura'
-" let g:vimtex_view_method = 'skim'
+" let g:vimtex_view_method = 'zathura'
 let g:vimtex_view_method = 'mupdf'
 "switch back to this one later when it is fixed
 au FileType tex let b:AutoPairs = AutoPairsDefine({'$':'$'})
