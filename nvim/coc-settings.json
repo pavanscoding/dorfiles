@@ -11,6 +11,7 @@
 ],
 "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd",
 "python.pythonPath": "/usr/bin/python",
+"python.venvPath": "/usr/local/lib/python3.10/site-packages",
 // "python.linting.enabled": false
 /* "clangd.arguments": ["-std=c++17"] */
 /* "cSpell.enabledLanguageIds": [ */
