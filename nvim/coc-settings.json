@@ -2,7 +2,7 @@
 /* "diagnostic.signOffset": 9999999, */
 "diagnostic.errorSign": " ",
 "diagnostic.warningSign": " ",
-"diagnostic.infoSign": "",
+"diagnostic.infoSign": " ",
 "diagnostic.refreshOnInsertMode": true,
 "diagnostic.virtualTextPrefix": "■ ",
 "diagnostic.checkCurrentLine": true,
