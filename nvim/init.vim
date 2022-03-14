@@ -11,8 +11,6 @@ Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'joom/latex-unicoder.vim'
-let g:coc_status_error_sign = ' '
-let g:coc_status_warning_sign = ' '
 let g:coc_global_extensions = [
         \ 'coc-pyright',
         \ 'coc-texlab',
@@ -147,7 +145,7 @@ nnoremap <buffer> <localleader>w:set wrap!<cr>
 "Run code 
 augroup compileandrun
     autocmd!
-    "C++
+    " C++
     autocmd filetype cpp nnoremap <buffer> <f3> :w<cr>:vsplit<cr>:vert ter g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr>i 
     autocmd filetype cpp nnoremap <buffer> <f4> :vnew <bar> :te ./a.out <cr>i
    autocmd filetype cpp nnoremap <buffer> <F8> :w <bar>!g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr> :vnew <bar> :te ./a.out <cr><cr>i
@@ -171,11 +169,14 @@ let g:python3_host_prog='/usr/bin/python3'
 " css
 autocmd FileType scss setl iskeyword+=@-@
 " reverse the order of coc.nvim 
+" let g:coc_status_error_sign = ' '
+" let g:coc_status_warning_sign = ' '
+
 let g:SuperTabDefaultCompletionType = "<c-n>"
 "coc.nvim setup
 " Set internal encoding of vim, not needed n neovim, since coc.nvim using some
 " unicode character in the file autoload/float.vim
-
+nnoremap <silent> <leader>? :call CocAction('diagnosticInfo') <CR>
 " TextEdit might fail if hidden is not set.
 set hidden
 
