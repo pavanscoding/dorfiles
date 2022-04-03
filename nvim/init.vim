@@ -2,7 +2,6 @@ call plug#begin(stdpath('data'))
 " Plug 'L04DB4L4NC3R/texgroff.vim' 
 Plug 'vimwiki/vimwiki'
 " Plug 'rcarriga/nvim-notify'
-" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-surround'
@@ -36,6 +35,7 @@ Plug 'jdhao/better-escape.vim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'SmiteshP/nvim-gps'
 Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'Yggdroot/indentLine'
 Plug 'nvim-lua/plenary.nvim'
@@ -43,7 +43,6 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'LinArcX/telescope-env.nvim'
 Plug 'glepnir/dashboard-nvim'
-Plug 'sidebar-nvim/sections-dap'
 Plug 'sidebar-nvim/sidebar.nvim' 
 Plug 'mfussenegger/nvim-dap'
 Plug 'nathom/filetype.nvim'
@@ -56,7 +55,7 @@ Plug 'lewis6991/gitsigns.nvim'
 " for html tag completion
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'windwp/nvim-ts-autotag'
-" Plug 'floobits/floobits-neovim'
+Plug 'floobits/floobits-neovim'
 " make sure u get the extension for cphelper
 Plug 'p00f/cphelper.nvim'
 set spelllang=en_us
@@ -148,8 +147,10 @@ nnoremap <buffer> <localleader>w:set wrap!<cr>
 augroup compileandrun
     autocmd!
     " C++
-    autocmd filetype cpp nnoremap <buffer> <f3> :w<cr>:vsplit<cr>:vert ter g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr>i 
-    autocmd filetype cpp nnoremap <buffer> <f4> :vnew <bar> :te ./a.out <cr>i
+    " autocmd filetype cpp nnoremap <buffer> <f3> :w<cr>:vsplit<cr>:vert ter g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr>i 
+    " autocmd filetype cpp nnoremap <buffer> <f4> :vnew <bar> :te ./a.out <cr>i
+    nnoremap <buffer> <F3> :CphReceive<cr>
+    autocmd filetype cpp nnoremap <buffer> <F4> :CphTest<cr>
     autocmd filetype cpp nnoremap <buffer> <F8> :w <bar>!g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr> :vnew <bar> :te ./a.out <cr><cr>i
     " autocmd filetype cpp nnoremap <buffer> <F8> :CompetitestRun <cr>
     "Python 
@@ -470,6 +471,120 @@ nnoremap <silent> <Space>bw :BufferOrderByWindowNumber<CR>
 " Lualine
 " au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree" | set laststatus=0 | else | set laststatus=2 | endif
 lua << END
+-- Lua
+-- Customized config
+require("nvim-gps").setup({
+
+	disable_icons = false,           -- Setting it to true will disable all icons
+
+	icons = {
+		["class-name"] = ' ',      -- Classes and class-like objects
+		["function-name"] = ' ',   -- Functions
+		["method-name"] = ' ',     -- Methods (functions inside class-like objects)
+		["container-name"] = '⛶ ',  -- Containers (example: lua tables)
+		["tag-name"] = '炙'         -- Tags (example: html tags)
+	},
+
+	-- Add custom configuration per language or
+	-- Disable the plugin for a language
+	-- Any language not disabled here is enabled by default
+	languages = {
+		-- Some languages have custom icons
+		["json"] = {
+			icons = {
+				["array-name"] = ' ',
+				["object-name"] = ' ',
+				["null-name"] = '[] ',
+				["boolean-name"] = 'ﰰﰴ ',
+				["number-name"] = '# ',
+				["string-name"] = ' '
+			}
+		},
+		["latex"] = {
+			icons = {
+				["title-name"] = "# ",
+				["label-name"] = " ",
+			},
+		},
+		["norg"] = {
+			icons = {
+				["title-name"] = " ",
+			},
+		},
+		["toml"] = {
+			icons = {
+				["table-name"] = ' ',
+				["array-name"] = ' ',
+				["boolean-name"] = 'ﰰﰴ ',
+				["date-name"] = ' ',
+				["date-time-name"] = ' ',
+				["float-name"] = ' ',
+				["inline-table-name"] = ' ',
+				["integer-name"] = '# ',
+				["string-name"] = ' ',
+				["time-name"] = ' '
+			}
+		},
+		["verilog"] = {
+			icons = {
+				["module-name"] = ' '
+			}
+		},
+		["yaml"] = {
+			icons = {
+				["mapping-name"] = ' ',
+				["sequence-name"] = ' ',
+				["null-name"] = '[] ',
+				["boolean-name"] = 'ﰰﰴ ',
+				["integer-name"] = '# ',
+				["float-name"] = ' ',
+				["string-name"] = ' '
+			}
+		},
+		["yang"] = {
+			icons = {
+				["module-name"] = " ",
+				["augment-path"] = " ",
+				["container-name"] = " ",
+				["grouping-name"] = " ",
+				["typedef-name"] = " ",
+				["identity-name"] = " ",
+				["list-name"] = "﬘ ",
+				["leaf-list-name"] = " ",
+				["leaf-name"] = " ",
+				["action-name"] = " ",
+			}
+		},
+
+		-- Disable for particular languages
+		-- ["bash"] = false, -- disables nvim-gps for bash
+		-- ["go"] = false,   -- disables nvim-gps for golang
+
+		-- Override default setting for particular languages
+		-- ["ruby"] = {
+		--	separator = '|', -- Overrides default separator with '|'
+		--	icons = {
+		--		-- Default icons not specified in the lang config
+		--		-- will fallback to the default value
+		--		-- "container-name" will fallback to default because it's not set
+		--		["function-name"] = '',    -- to ensure empty values, set an empty string
+		--		["tag-name"] = ''
+		--		["class-name"] = '::',
+		--		["method-name"] = '#',
+		--	}
+		--}
+	},
+
+	separator = ' > ',
+
+	-- limit for amount of context shown
+	-- 0 means no limit
+	depth = 0,
+
+	-- indicator used when context hits depth limit
+	depth_limit_indicator = ".."
+})
+local gps = require("nvim-gps")
 require'lualine'.setup {
   options = {
     icons_enabled = true,
@@ -482,7 +597,11 @@ require'lualine'.setup {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff',
                   {'diagnostics', sources={'coc'}}},
-    lualine_c = {'filename'},
+    -- lualine_c = {'filename'},
+    lualine_c = {
+                {'filename'},
+				{ gps.get_location, cond = gps.is_available },
+			},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
@@ -758,16 +877,11 @@ let g:dashboard_custom_header = [
 " IF I NEED IT, GET A DEBUGGER FROM NVIM-DAP
 lua << END
 require("sidebar-nvim").setup({
+    side="right",
     sections = {
         "git",
---        require("dap-sidebar-nvim.breakpoints"),
         "todos"
     },
-    dap = {
-        breakpoints = {
-            icon = "🔍"
-        }
-    }
 })
 END
 
@@ -927,7 +1041,7 @@ require('gitsigns').setup {
     follow_files = true
   },
   attach_to_untracked = true,
-  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
   current_line_blame_opts = {
     virt_text = true,
     virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
