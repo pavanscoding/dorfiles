@@ -149,7 +149,7 @@ augroup compileandrun
     " C++
     " autocmd filetype cpp nnoremap <buffer> <f3> :w<cr>:vsplit<cr>:vert ter g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr>i 
     " autocmd filetype cpp nnoremap <buffer> <f4> :vnew <bar> :te ./a.out <cr>i
-    nnoremap <buffer> <F3> :CphReceive<cr>
+    nnoremap <F3> :CphReceive<cr>
     autocmd filetype cpp nnoremap <buffer> <F4> :CphTest<cr>
     autocmd filetype cpp nnoremap <buffer> <F8> :w <bar>!g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result "%"<cr> :vnew <bar> :te ./a.out <cr><cr>i
     " autocmd filetype cpp nnoremap <buffer> <F8> :CompetitestRun <cr>
