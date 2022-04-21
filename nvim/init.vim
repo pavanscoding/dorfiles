@@ -39,6 +39,7 @@ Plug 'SmiteshP/nvim-gps'
 Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'Yggdroot/indentLine'
 Plug 'nvim-lua/plenary.nvim'
+" install ripgrep and sqlite
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'LinArcX/telescope-env.nvim'
@@ -55,9 +56,10 @@ Plug 'lewis6991/gitsigns.nvim'
 " for html tag completion
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'windwp/nvim-ts-autotag'
-Plug 'floobits/floobits-neovim'
+" Plug 'floobits/floobits-neovim'
 " make sure u get the extension for cphelper
 Plug 'p00f/cphelper.nvim'
+" Plug 'norcalli/nvim-colorizer.lua'
 set spelllang=en_us
 call plug#end()
 
@@ -79,7 +81,7 @@ set foldmethod=indent
 set foldlevel=99
 nnoremap <silent> <esc> :noh<cr><esc>
 autocmd FileType tex setlocal spell
-au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.css,*.rkt,*.h,*.html,*.tex,*.vim,*.vimrc,*.json,*.lua
+au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.css,*.rkt,*.h,*.html,*.tex,*.vim,*.vimrc,*.json,*.lua,*.c
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
@@ -621,7 +623,6 @@ require'lualine'.setup {
 END
 
 " nvim-tree.lua
-let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
 let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
 let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
 let g:nvim_tree_root_folder_modifier = ':~' "This is the default. See :help filename-modifiers for more options
@@ -677,7 +678,7 @@ nnoremap <leader>n :NvimTreeFindFile<CR>
 
 " a list of groups can be found at `:help nvim_tree_highlight`
 " highlight NvimTreeFolderIcon guibg=blue
-lua << END
+lua <<END
 require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
   auto_reload_on_write = true,
   disable_netrw = false,
@@ -687,6 +688,7 @@ require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
   hijack_unnamed_buffer_when_opening = false,
   ignore_buffer_on_setup = false,
   open_on_setup = false,
+  open_on_setup_file = false,
   open_on_tab = false,
   sort_by = "name",
   update_cwd = false,
@@ -702,6 +704,16 @@ require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
       custom_only = false,
       list = {
         -- user mappings go here
+      },
+    },
+  },
+  renderer = {
+    indent_markers = {
+      enable = false,
+      icons = {
+        corner = "└ ",
+        edge = "│ ",
+        none = "  ",
       },
     },
   },
@@ -740,6 +752,7 @@ require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
     timeout = 400,
   },
   actions = {
+    use_system_clipboard = true,
     change_dir = {
       enable = true,
       global = false,
@@ -772,10 +785,8 @@ require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
       profile = false,
     },
   },
-}
+} -- END_DEFAULT_OPTS" telescope.nvim
 END
-
-" telescope.nvim
 " Do sudo pacman -S ripgrep sqlite
 " Find files using Telescope command-line sugar.
 nnoremap ff :Telescope find_files<cr>
@@ -1089,3 +1100,6 @@ autocmd BufEnter * :lua require('lazygit.utils').project_root_dir()
 
 " Cp helper
 let g:cpp_compile_command='g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result solution.cpp -o cpp.out'
+
+" Colorizer
+" lua require'colorizer'.setup()
