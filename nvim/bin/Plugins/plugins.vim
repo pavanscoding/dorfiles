@@ -63,5 +63,7 @@ Plug 'windwp/nvim-ts-autotag'
 " make sure u get the extension for cphelper
 Plug 'p00f/cphelper.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'shaunsingh/nord.nvim'
+" Plug 'arcticicestudio/nord-vim' 
 set spelllang=en_us
 call plug#end()

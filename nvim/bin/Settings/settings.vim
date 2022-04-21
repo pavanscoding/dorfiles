@@ -46,7 +46,8 @@ endif
 
 let g:tokyonight_style = "night"
 " colorscheme tokyonight
-colorscheme nightfly
+" colorscheme nightfly
+colorscheme nord
 set nu rnu " relative line numbering
 set clipboard+=unnamedplus " public copy/paste register
 set ruler
