@@ -17,6 +17,7 @@ source $HOME/.config/nvim/bin/Sidebar/sidebar.vim
 luafile $HOME/.config/nvim/bin/Git/octo.lua
 luafile $HOME/.config/nvim/bin/Git/gitsigns.lua
 source $HOME/.config/nvim/bin/Git/lazygit.vim
+luafile $HOME/.config/nvim/bin/Notify/notify.lua
 
 " better escape
 let g:better_escape_interval = 200

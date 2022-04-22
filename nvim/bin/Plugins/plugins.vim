@@ -64,6 +64,6 @@ Plug 'windwp/nvim-ts-autotag'
 Plug 'p00f/cphelper.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'shaunsingh/nord.nvim'
-" Plug 'arcticicestudio/nord-vim' 
+Plug 'rcarriga/nvim-notify'
 set spelllang=en_us
 call plug#end()

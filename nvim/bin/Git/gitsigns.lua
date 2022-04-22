@@ -1,3 +1,26 @@
+local status_ok, gitsigns = pcall(require, "gitsigns")
+if not status_ok then
+  vim.notify("gitsigns plugin not found!")
+  return
+end
+
+local function current_line_blame_formatter(_, blame_info, opts)
+  local text
+  if blame_info.author == "Not Committed Yet" then
+    text = "Not Committed Yet"
+  else
+    local date_time
+    if opts.relative_time then
+      date_time = require("gitsigns.util").get_relative_time(tonumber(blame_info["author_time"]))
+    else
+      date_time = os.date("%Y-%m-%d", tonumber(blame_info["author_time"]))
+    end
+
+    text = string.format("%s, %s - %s", blame_info.author, date_time, blame_info.summary)
+  end
+  return {{" " .. text, "Label"}}
+end
+
 require('gitsigns').setup {
   signs = {
     add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
@@ -22,7 +45,8 @@ require('gitsigns').setup {
     delay = 1000,
     ignore_whitespace = false,
   },
-  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+  -- current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+  current_line_blame_formatter = current_line_blame_formatter,
   sign_priority = 6,
   update_debounce = 100,
   status_formatter = nil, -- Use default
