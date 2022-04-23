@@ -26,6 +26,7 @@ font pango:Segoe UI Variable Static Display 14
 exec xrandr --output HDMI-1 --mode 2560x1440
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id dunst
+# exec_always bash ~/.config/polybar/launch.sh --forest
 # exec discord
 # exec killall discord
 exec_always nm-applet

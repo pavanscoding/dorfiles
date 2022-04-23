@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
-##!/bin/sh
 
-VOLUME_MUTE="🔇"
-VOLUME_LOW="🔈"
-VOLUME_MID="🔉"
-VOLUME_HIGH="🔊"
+VOLUME_MUTE=""
+VOLUME_LOW="奄"
+VOLUME_MID="墳"
+VOLUME_HIGH=""
 SOUND_LEVEL=$(amixer -D pulse get Master | awk -F"[][]" '/%/ { print $2 }' | awk -F"%" 'BEGIN{tot=0; i=0} {i++; tot+=$1} END{printf("%s\n", tot/i) }')
 MUTED=$(amixer -D pulse get Master | awk ' /%/{print ($NF=="[off]" ? 1 : 0); exit;}')
 
@@ -13,7 +12,7 @@ if [ "$MUTED" = "1" ]
 then
     ICON="$VOLUME_MUTE"
 else
-    if [ "$SOUND_LEVEL" -lt 34 ]
+    if [ "$SOUND_LEVEL" -lt 15 ]
     then
         ICON="$VOLUME_LOW"
     elif [ "$SOUND_LEVEL" -lt 67 ]
@@ -24,4 +23,5 @@ else
     fi
 fi
 
-echo "$ICON" "$SOUND_LEVEL" | awk '{ printf(" %s:%3s%% \n", $1, $2) }'
+echo "$ICON" $SOUND_LEVEL"%"
+# echo "$ICON" $SOUND_LEVEL
