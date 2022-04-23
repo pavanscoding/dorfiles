@@ -65,5 +65,6 @@ Plug 'p00f/cphelper.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'shaunsingh/nord.nvim'
 Plug 'rcarriga/nvim-notify'
+Plug 'mboughaba/i3config.vim'
 set spelllang=en_us
 call plug#end()

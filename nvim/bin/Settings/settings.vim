@@ -24,8 +24,6 @@ au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.css,*.rkt,*.h,*.html,*.tex,*.vim,*
     \ set fileformat=unix |
     \ set linebreak
 
-au BufNewFile,BufRead *.conf,config
-    \ setf dosini
 set encoding=UTF-8
 
 highlight Comment cterm=italic gui=italic

@@ -40,3 +40,9 @@ let g:cpp_compile_command='g++ -std=c++17 -Wshadow -Wall -O2 -Wno-unused-result 
 
 " Colorizer
 lua require'colorizer'.setup()
+
+" i3config highlighting
+aug i3config_ft_detection
+  au!
+  au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
+aug end
