@@ -1,0 +1,8 @@
+# !/bin/sh
+
+# make sure to uncomment the required sections in pacman.conf
+
+sudo pacman -S picom i3-wm networkmanager network-manager-applet nm-connection-editor pipwire helvum pipewire-alsa pipewire-pulse pipewire-media-session bluez bluez-utils blueman pavucontrol dunst
+maim xclip firefox rofi steam discord i3blocks i3lock obs-studio base-devel git thunar discord feh playerctl wpa_supplicant wireless_tools;
+
+pacaur -S zoom wlr-randr spotify i3-gaps-rounded-git;

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# !/usr/bin/env bash
 # TEMP=$(sensors | grep 'Package id 0:\|Tdie' | grep ':[ ]*+[0-9]*.[0-9]*°C' -o | grep '+[0-9]*.[0-9]*°C' -o)
 # CPU_USAGE=$(mpstat 1 1 | awk '/Average:/ {printf("%s\n", $(NF-9))}')
 # echo "$CPU_USAGE $TEMP" | awk '{ printf("💾 CPU:%6s% @ %s\n"), $1, $2 }'
@@ -17,6 +17,6 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-sensors | awk '/Core 0/ {print "🌡" $3"°"}'
+sensors | awk '/Core 0/ {print "🌡" $3"° C"}'
 
 

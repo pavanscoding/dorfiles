@@ -2,8 +2,8 @@
 
 VOLUME_MUTE=""
 VOLUME_LOW="奄"
-VOLUME_MID="墳"
-VOLUME_HIGH=""
+VOLUME_MID="奔"
+VOLUME_HIGH="墳"
 SOUND_LEVEL=$(amixer -D pulse get Master | awk -F"[][]" '/%/ { print $2 }' | awk -F"%" 'BEGIN{tot=0; i=0} {i++; tot+=$1} END{printf("%s\n", tot/i) }')
 MUTED=$(amixer -D pulse get Master | awk ' /%/{print ($NF=="[off]" ? 1 : 0); exit;}')
 
